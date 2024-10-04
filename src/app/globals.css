@@ -75,7 +75,31 @@ a {
   }
 }
 
+/* heading */
+.heading-1 {
+  font-size: 137.08px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 140px;
+  letter-spacing: -4px;
+}
+
 /* text */
+.text-1 {
+  font-size: 52px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 64px;
+  letter-spacing: -1px;
+}
+
+.text-2 {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 200;
+  line-height: 40px;
+}
+
 .text-5 {
   font-size: 20px;
   font-style: normal;
