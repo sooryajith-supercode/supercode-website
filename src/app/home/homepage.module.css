@@ -1,0 +1,9 @@
+.sectionMainWrap{
+    position: relative;
+}
+.sectionMainimage img{
+    width: 90%;
+    position:absolute;
+    top: 40%;
+    border-radius: 12px;
+}

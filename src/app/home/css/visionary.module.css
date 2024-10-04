@@ -2,3 +2,16 @@
     background-color: var(--color-9);
     color: var(--color-10);
 }
+.visionaryWrap{
+    height: 916px;
+    position: relative;
+}
+.visionarycontent{
+    position: absolute;
+    bottom: 200px;
+    right: 254px;
+}
+.VisionaryDescription{
+    max-width: 785px;
+    width: 100%;
+}

@@ -1,5 +1,5 @@
 import React from "react";
-import * as styles from "../css/bannersection.module.css";
+import * as styles from "../css/visionary.module.css";
 
 export default function Visionary({ visionary = {} }) {
     const { description } = visionary;
@@ -7,8 +7,8 @@ export default function Visionary({ visionary = {} }) {
     return (
         <div className={`${styles?.visionaryWrap}`}>
             <div className='container'>
-                <div>
-                    <p className="text-1">{description}</p>
+                <div className={`${styles?.visionarycontent}`}>
+                    <p className={`${styles?.VisionaryDescription} text-1`}>{description}</p>
                 </div>
             </div>
         </div>

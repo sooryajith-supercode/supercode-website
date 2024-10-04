@@ -3,8 +3,9 @@
     justify-content: space-between;
     align-items: center;
     padding-top: 48px;
-    position: absolute;
+    position: fixed;
     width: 90%;
+    z-index: 1;
 }
 .NavWrapLinkBtn{
     display: flex;
