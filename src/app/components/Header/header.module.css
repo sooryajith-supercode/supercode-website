@@ -1,0 +1,15 @@
+.NavWrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: 48px;
+}
+.NavWrapLinkBtn{
+    display: flex;
+    gap: 48px;
+    align-items: center;
+}
+.NavWrapLink{
+    display: flex;
+    gap: 40px;
+}

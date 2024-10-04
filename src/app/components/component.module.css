@@ -1,0 +1,10 @@
+/* Primarybutton */
+.PrimaryButton {
+    display: inline-flex;
+    padding: 16px 20.5px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    border-radius: 56px;
+    border: 1.2px solid var(--color-9);
+}

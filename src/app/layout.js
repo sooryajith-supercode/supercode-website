@@ -1,5 +1,6 @@
 import localFont from "next/font/local";
 import "./globals.css";
+import Main from "./Main";
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
@@ -11,6 +12,11 @@ const geistMono = localFont({
   variable: "--font-geist-mono",
   weight: "100 900",
 });
+const ppRightGrotesk = localFont({
+  src: "./fonts/PPRightGrotesk-Regular.woff",
+  variable: "--font-pprightgrotesk-regular",
+  weight: "100 900",
+});
 
 export const metadata = {
   title: "Create Next App",
@@ -20,9 +26,14 @@ export const metadata = {
 export default function RootLayout({ children }) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable}`}>
+      <body 
+      // className={ppRightGrotesk.className}
+      >
+      <Main>
         {children}
-      </body>
-    </html>
+      </Main>
+    </body>
+    </html >
   );
 }
+
