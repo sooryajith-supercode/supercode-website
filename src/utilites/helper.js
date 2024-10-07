@@ -34,7 +34,81 @@ export const HomePage = {
         bannerDescription: "Built 15 years ago, our first client’s website still thrives. Because Great Design Lasts.",
     },
     visionary: {
-        description:"Supercode drives growth for visionary businesses. Based in Bangalore, we partner with global clients to build impactful websites.",
+        description: "Supercode drives growth for visionary businesses. Based in Bangalore, we partner with global clients to build impactful websites.",
 
+    },
+    whatwedo: {
+        heading: "What we do",
+        serviceData: [
+            {
+                heading: "Website Design",
+                description: "",
+                icon: `<svg width="227" height="269" viewBox="0 0 227 269" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M212 167.664L192.304 133.504H152.904L212 167.664Z" fill="black"/>
+                            <path d="M152.904 201.832H192.304L212 167.664L152.904 201.832Z" fill="black"/>
+                            <path d="M152.904 133.504L133.2 167.664L152.904 201.832V133.504Z" fill="black"/>
+                            <path d="M212 99.3363L192.304 65.1682H152.904L212 99.3363Z" fill="black"/>
+                            <path d="M152.904 133.505H192.304L212 99.3364L152.904 133.505Z" fill="black"/>
+                            <path d="M152.904 65.1682L133.2 99.3363L152.904 133.504V65.1682Z" fill="black"/>
+                            <path d="M93.8001 167.664L74.1043 133.504H34.7043L93.8001 167.664Z" fill="black"/>
+                            <path d="M34.7043 201.832H74.1043L93.8001 167.664L34.7043 201.832Z" fill="black"/>
+                            <path d="M34.7043 133.504L15 167.664L34.7043 201.832V133.504Z" fill="black"/>
+                            <path d="M93.8001 99.3363L74.1043 65.1682H34.7043L93.8001 99.3363Z" fill="black"/>
+                            <path d="M34.7043 133.505H74.1043L93.8001 99.3364L34.7043 133.505Z" fill="black"/>
+                            <path d="M34.7043 65.1682L15 99.3363L34.7043 133.504V65.1682Z" fill="black"/>
+                            <path d="M152.904 201.832L133.2 167.664H93.7999L152.904 201.832Z" fill="black"/>
+                            <path d="M93.7999 236H133.2L152.904 201.832L93.7999 236Z" fill="black"/>
+                            <path d="M93.8 167.664L74.1042 201.832L93.8 236V167.664Z" fill="black"/>
+                            <path d="M152.904 133.504L133.2 99.3362H93.7999L152.904 133.504Z" fill="white"/>
+                            <path d="M93.7999 167.664H133.2L152.904 133.504L93.7999 167.664Z" fill="white"/>
+                            <path d="M93.8 99.3362L74.1042 133.504L93.8 167.664V99.3362Z" fill="white"/>
+                            <path d="M152.904 65.1681L133.2 31H93.7999L152.904 65.1681Z" fill="black"/>
+                            <path d="M93.7999 99.3363H133.2L152.904 65.1682L93.7999 99.3363Z" fill="black"/>
+                            <path d="M93.8 31L74.1042 65.1681L93.8 99.3362V31Z" fill="black"/>
+                            </svg>
+                            `,
+            },
+            {
+                heading: "Web Development",
+                description: "We design and develop custom websites that are scalable, sustain our client's business goals for years to come and are user friendly for     billions of people worldwide.",
+                icon: `<svg width="227" height="269" viewBox="0 0 227 269" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M219.001 134.005L197.705 96.6699H155.105L219.001 134.005Z" fill="black"/>
+                        <path d="M155.105 171.329H197.705L219.001 134.004L155.105 171.329Z" fill="black"/>
+                        <path d="M155.105 96.6699L133.801 134.005L155.105 171.33V96.6699Z" fill="black"/>
+                        <path d="M155.108 171.329L133.803 134.004H91.2031L155.108 171.329Z" fill="black"/>
+                        <path d="M91.2031 208.665H133.803L155.108 171.33L91.2031 208.665Z" fill="black"/>
+                        <path d="M91.2016 134.004L69.9062 171.329L91.2016 208.664V134.004Z" fill="black"/>
+                        <path d="M155.108 96.6689L133.803 59.334H91.2031L155.108 96.6689Z" fill="black"/>
+                        <path d="M91.2031 134.003H133.803L155.108 96.668L91.2031 134.003Z" fill="black"/>
+                        <path d="M91.2016 59.334L69.9062 96.6689L91.2016 134.004V59.334Z" fill="black"/>
+                        <path d="M91.2001 208.665L69.9047 171.33H27.3047L91.2001 208.665Z" fill="black"/>
+                        <path d="M27.3047 245.999H69.9047L91.2001 208.664L27.3047 245.999Z" fill="black"/>
+                        <path d="M27.3046 171.33L6 208.665L27.3046 246V171.33Z" fill="black"/>
+                        <path d="M91.2001 134.005L69.9047 96.6697H27.3047L91.2001 134.005Z" fill="white"/>
+                        <path d="M27.3047 171.329H69.9047L91.2001 134.004L27.3047 171.329Z" fill="white"/>
+                        <path d="M27.3046 96.6697L6 134.005L27.3046 171.33V96.6697Z" fill="white"/>
+                        <path d="M91.2001 59.3349L69.9047 22H27.3047L91.2001 59.3349Z" fill="black"/>
+                        <path d="M27.3047 96.6689H69.9047L91.2001 59.334L27.3047 96.6689Z" fill="black"/>
+                        <path d="M27.3046 22L6 59.3349L27.3046 96.6698V22Z" fill="black"/>
+                        </svg>
+                        `,
+            },
+        ]
+    },
+    results:{
+        heading:"Results that Speak",
+        slides:[
+            {
+                testimonial:"We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name:"Keerthana Reddy",
+                position:"Creator of Opportunities - BDM Avaniko Technologies"
+            },
+            {
+                image:'/assets/silver.png',
+                awardFor:"Silver for Avaniko Technologies",
+                awardName:"Big Bang Awards 2024",
+            }
+        ]
     }
+
 }

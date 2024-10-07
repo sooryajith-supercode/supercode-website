@@ -84,6 +84,14 @@ a {
   letter-spacing: -4px;
 }
 
+.heading-3 {
+  font-size: 84px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 110px;
+  letter-spacing: -2px;
+}
+
 /* text */
 .text-1 {
   font-size: 52px;
@@ -98,6 +106,13 @@ a {
   font-style: normal;
   font-weight: 200;
   line-height: 40px;
+}
+
+.text-4-med {
+  font-size: 32px;
+  font-style: normal;
+  font-weight: 500;
+  line-height: 62px;
 }
 
 .text-5 {

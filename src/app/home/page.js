@@ -3,9 +3,11 @@ import * as styles from "./homepage.module.css"
 import BannerSection from './components/BannerSection'
 import { HomePage } from '@/utilites/helper'
 import Visionary from './components/visionary';
+import WhatWeDo from './components/WhatWeDo';
+import Results from './components/Results';
 
 export default function Home() {
-    const { banner, visionary } = HomePage || {};
+    const { banner, visionary,whatwedo,results } = HomePage || {};
     return (
         <div>
             <div className={`${styles?.sectionMainWrap}`}>
@@ -18,6 +20,8 @@ export default function Home() {
                     </div>
                 </div>
             </div>
+            <WhatWeDo whatwedo={whatwedo} />
+            <Results results={results}/>
         </div>
     )
 }
