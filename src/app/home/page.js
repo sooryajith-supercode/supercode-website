@@ -5,9 +5,10 @@ import { HomePage } from '@/utilites/helper'
 import Visionary from './components/visionary';
 import WhatWeDo from './components/WhatWeDo';
 import Results from './components/Results';
+import SuperHits from './components/SuperHits';
 
 export default function Home() {
-    const { banner, visionary,whatwedo,results } = HomePage || {};
+    const { banner, visionary,whatwedo,results,superhits } = HomePage || {};
     return (
         <div>
             <div className={`${styles?.sectionMainWrap}`}>
@@ -22,6 +23,7 @@ export default function Home() {
             </div>
             <WhatWeDo whatwedo={whatwedo} />
             <Results results={results}/>
+            <SuperHits superhits={superhits}/>
         </div>
     )
 }

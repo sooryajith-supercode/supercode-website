@@ -1,0 +1,174 @@
+.resultsWrap {
+    background: rgba(64, 81, 74, 0.10);
+    backdrop-filter: blur(5px);
+}
+
+.resultsMainHeading {
+    padding-top: 200px;
+}
+
+.resultsWrapLogo {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.resultsWrapLogo img {
+    position: absolute;
+    padding-top: 50px;
+}
+
+.SliderContentWrap {
+    padding: 42px 46px;
+}
+
+.testimonialContent {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+    justify-content: center;
+    align-items: center;
+}
+
+.testimonialDesc {
+    max-width: 617px;
+    width: 100%;
+    text-align: center;
+}
+
+.NamePosition {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    align-items: center;
+}
+
+.position {
+    max-width: 158px;
+    width: 100%;
+    font-size: 12px;
+    font-style: normal;
+    font-weight: 400;
+    text-align: center;
+}
+
+.awardContent {
+    display: flex;
+
+}
+
+.customSwiper {
+    padding-top: 40px;
+}
+.customSwiperTwo {
+    padding-top: 20px;
+}
+
+.slide-content {
+    border-radius: 12px !important;
+}
+
+.awardinfo {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+    justify-content: space-between;
+
+}
+
+.awardFor {
+    max-width: 180px;
+    width: 100%;
+    font-size: 32.36px;
+    font-style: normal;
+    font-weight: 800;
+    line-height: 40px;
+    text-align: right;
+}
+
+.awardName {
+    max-width: 160px;
+    width: 100%;
+    font-size: 32.36px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: 40px;
+    text-align: right;
+}
+
+.customSwiper {
+    height: auto;
+
+}
+
+.customSwiper .slide-0 {
+    max-width: 709px;
+    width: 100%;
+    height: 320px;
+}
+
+.customSwiper .slide-1 {
+    max-width: 404px;
+    width: 100%;
+    height: 320px;
+}
+
+.customSwiper .slide-2 {
+    max-width: 709px;
+    width: 100%;
+    height: 320px;
+}
+
+.customSwiper .slide-3 {
+    max-width: 404px;
+    width: 100%;
+    height: 320px;
+}
+
+.customSwiperTwo {
+    height: auto;
+
+}
+
+.customSwiperTwo .slide-0 {
+
+    max-width: 404px;
+    width: 100%;
+    height: 320px;
+}
+
+.customSwiperTwo .slide-1 {
+    max-width: 709px;
+    width: 100%;
+    height: 320px;
+}
+
+.customSwiperTwo .slide-2 {
+    max-width: 404px;
+    width: 100%;
+    height: 320px;
+}
+
+.customSwiperTwo .slide-3 {
+    max-width: 709px;
+    width: 100%;
+    height: 320px;
+}
+.impactButtonWrap{
+    width: 100%;
+    text-align: center;
+    padding-top: 72px;
+}
+.customSwiper {
+    cursor: url('/assets/swiper-arrow.png'), auto;
+}
+.customSwiper:hover {
+    cursor: url('/assets/swiper-arrow.png'); 
+}
+.customSwiperTwo {
+    cursor: url('/assets/swiper-arrow.png'), auto;
+}
+.customSwiperTwo:hover {
+    cursor: url('/assets/swiper-arrow.png'); 
+}

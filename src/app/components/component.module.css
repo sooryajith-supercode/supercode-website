@@ -7,24 +7,69 @@
     gap: 16px;
     border-radius: 56px;
     border: 1.2px solid var(--color-9);
+    cursor: pointer;
 }
+
+.secondaryButton {
+    display: inline-flex;
+    padding: 8px 22px;
+    justify-content: center;
+    align-items: center;
+    gap: 16px;
+    cursor: pointer;
+    background-color: var(--color-10);
+}
+
 /* cards */
 /* servicecard */
-.ServiceCard{
+.ServiceCard {
     padding: 30px 0;
 }
-.ServiceCardTextContent{
+
+.ServiceCardTextContent {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     gap: 10px;
 }
-.ServiceCardText{
+
+.ServiceCardText {
     display: flex;
     justify-content: space-between;
     gap: 20px;
 }
-.ServiceCarddesc{
+
+.ServiceCarddesc {
     max-width: 711px;
     width: 100%;
+}
+
+/* superhitcard */
+
+.SuperHitTitle {
+    max-width: 540px;
+    width: 100%;
+    padding-bottom: 20px;
+}
+
+.SuperHitcontentWrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.SuperHitProject {
+    display: flex;
+    flex-direction: column;
+    gap: 22px;
+}
+.SuperHitbtnWrap{
+    display: flex;
+    gap: 8px;
+}
+.SuperHitCard{
+    padding-bottom: 140px;
+}
+.SuperHitCard:nth-child(even) {
+    margin-top: 40px;
 }

@@ -1,0 +1,10 @@
+.superHitsWrap {
+    padding: 100px;
+    background-color: var(--color-8);
+}
+
+.ProjectsWrap {
+    padding-top: 60px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+}

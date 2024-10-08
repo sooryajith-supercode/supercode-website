@@ -95,20 +95,132 @@ export const HomePage = {
             },
         ]
     },
-    results:{
-        heading:"Results that Speak",
-        slides:[
+    results: {
+        heading: "Results that Speak",
+        slides: [
             {
-                testimonial:"We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
-                Name:"Keerthana Reddy",
-                position:"Creator of Opportunities - BDM Avaniko Technologies"
+                testimonial: "We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name: "Keerthana Reddy",
+                position: "Creator of Opportunities - BDM Avaniko Technologies"
             },
             {
-                image:'/assets/silver.png',
-                awardFor:"Silver for Avaniko Technologies",
-                awardName:"Big Bang Awards 2024",
-            }
-        ]
+                image: '/assets/silver.png',
+                awardFor: "Silver for Avaniko Technologies",
+                awardName: "Big Bang Awards 2024",
+            },
+            {
+                testimonial: "We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name: "Keerthana Reddy",
+                position: "Creator of Opportunities - BDM Avaniko Technologies"
+            },
+            {
+                image: '/assets/silver.png',
+                awardFor: "Silver for Avaniko Technologies",
+                awardName: "Big Bang Awards 2024",
+            },
+        ],
+        slidestwo: [
+            {
+                image: '/assets/silver.png',
+                awardFor: "Silver for Avaniko Technologies",
+                awardName: "Big Bang Awards 2024",
+            },
+            {
+                testimonial: "We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name: "Keerthana Reddy",
+                position: "Creator of Opportunities - BDM Avaniko Technologies"
+            },
+            {
+                image: '/assets/silver.png',
+                awardFor: "Silver for Avaniko Technologies",
+                awardName: "Big Bang Awards 2024",
+            },
+            {
+                testimonial: "We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name: "Keerthana Reddy",
+                position: "Creator of Opportunities - BDM Avaniko Technologies"
+            },
+
+        ],
+        button: {
+            label: "Read impact",
+            slug: "/"
+        }
+    },
+    superhits: {
+        heading:"Our Super Hits",
+        hitprojects:[
+            {
+                title:"Project headline in two lines highlighting achievements.",
+                image:"/assets/project-img-demo.png",
+                clientName:"Client Name",
+                buttonDesign:{
+                    label:"Web Design",slug:"/"
+                },
+                buttonDev:{
+                    label:"Web Development",slug:"/"
+                },
+            },
+            {
+                title:"Project headline in two lines highlighting achievements.Project headline in two lines highlighting achievements.",
+                image:"/assets/project-img-demo.png",
+                clientName:"Client Name",
+                buttonDesign:{
+                    label:"Web Design",slug:"/"
+                },
+                buttonDev:{
+                    label:"Web Development",slug:"/"
+                },
+            },
+            {
+                title:"Project headline in two lines highlighting achievements.",
+                image:"/assets/project-img-demo.png",
+                clientName:"Client Name",
+                buttonDesign:{
+                    label:"Web Design",slug:"/"
+                },
+                buttonDev:{
+                    label:"Web Development",slug:"/"
+                },
+            },
+            {
+                title:"Project headline in two lines highlighting achievements.",
+                image:"/assets/project-img-demo.png",
+                clientName:"Client Name",
+                buttonDesign:{
+                    label:"Web Design",slug:"/"
+                },
+                buttonDev:{
+                    label:"Web Development",slug:"/"
+                },
+            },
+            {
+                title:"Project headline in two lines highlighting achievements.",
+                image:"/assets/project-img-demo.png",
+                clientName:"Client Name",
+                buttonDesign:{
+                    label:"Web Design",slug:"/"
+                },
+                buttonDev:{
+                    label:"Web Development",slug:"/"
+                },
+            },
+            {
+                title:"Project headline in two lines highlighting achievements.",
+                image:"/assets/project-img-demo.png",
+                clientName:"Client Name",
+                buttonDesign:{
+                    label:"Web Design",slug:"/"
+                },
+                buttonDev:{
+                    label:"Web Development",slug:"/"
+                },
+            },
+        ],
+        button:{
+            label:"See more work",
+            slug:"/"
+        }
     }
 
 }
