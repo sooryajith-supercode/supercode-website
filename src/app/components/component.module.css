@@ -69,6 +69,7 @@
 }
 .SuperHitCard{
     padding-bottom: 140px;
+    cursor: url('/assets/know-more-arrow.png'), auto;
 }
 .SuperHitCard:nth-child(even) {
     margin-top: 40px;
