@@ -6,9 +6,10 @@ import Visionary from './components/visionary';
 import WhatWeDo from './components/WhatWeDo';
 import Results from './components/Results';
 import SuperHits from './components/SuperHits';
+import Clients from './components/Clients';
 
 export default function Home() {
-    const { banner, visionary,whatwedo,results,superhits } = HomePage || {};
+    const { banner, visionary,whatwedo,results,superhits ,clients} = HomePage || {};
     return (
         <div>
             <div className={`${styles?.sectionMainWrap}`}>
@@ -24,6 +25,7 @@ export default function Home() {
             <WhatWeDo whatwedo={whatwedo} />
             <Results results={results}/>
             <SuperHits superhits={superhits}/>
+            <Clients clients={clients}/>
         </div>
     )
 }

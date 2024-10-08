@@ -1,0 +1,17 @@
+.clientContainer{
+    padding-top: 80px;
+}
+.clientContentWrap{
+    padding-top: 40px;
+}
+.clientWrap {
+    position: relative; 
+}
+.hoveredImageWrap {
+    position: relative;
+}
+
+.hoveredImage {
+    position:absolute;
+    top: 0;
+}

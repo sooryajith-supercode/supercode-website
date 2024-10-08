@@ -148,79 +148,189 @@ export const HomePage = {
         }
     },
     superhits: {
-        heading:"Our Super Hits",
-        hitprojects:[
+        heading: "Our Super Hits",
+        hitprojects: [
             {
-                title:"Project headline in two lines highlighting achievements.",
-                image:"/assets/project-img-demo.png",
-                clientName:"Client Name",
-                buttonDesign:{
-                    label:"Web Design",slug:"/"
+                title: "Project headline in two lines highlighting achievements.",
+                image: "/assets/project-img-demo.png",
+                clientName: "Client Name",
+                buttonDesign: {
+                    label: "Web Design", slug: "/"
                 },
-                buttonDev:{
-                    label:"Web Development",slug:"/"
+                buttonDev: {
+                    label: "Web Development", slug: "/"
                 },
             },
             {
-                title:"Project headline in two lines highlighting achievements.Project headline in two lines highlighting achievements.",
-                image:"/assets/project-img-demo.png",
-                clientName:"Client Name",
-                buttonDesign:{
-                    label:"Web Design",slug:"/"
+                title: "Project headline in two lines highlighting achievements.Project headline in two lines highlighting achievements.",
+                image: "/assets/project-img-demo.png",
+                clientName: "Client Name",
+                buttonDesign: {
+                    label: "Web Design", slug: "/"
                 },
-                buttonDev:{
-                    label:"Web Development",slug:"/"
-                },
-            },
-            {
-                title:"Project headline in two lines highlighting achievements.",
-                image:"/assets/project-img-demo.png",
-                clientName:"Client Name",
-                buttonDesign:{
-                    label:"Web Design",slug:"/"
-                },
-                buttonDev:{
-                    label:"Web Development",slug:"/"
+                buttonDev: {
+                    label: "Web Development", slug: "/"
                 },
             },
             {
-                title:"Project headline in two lines highlighting achievements.",
-                image:"/assets/project-img-demo.png",
-                clientName:"Client Name",
-                buttonDesign:{
-                    label:"Web Design",slug:"/"
+                title: "Project headline in two lines highlighting achievements.",
+                image: "/assets/project-img-demo.png",
+                clientName: "Client Name",
+                buttonDesign: {
+                    label: "Web Design", slug: "/"
                 },
-                buttonDev:{
-                    label:"Web Development",slug:"/"
-                },
-            },
-            {
-                title:"Project headline in two lines highlighting achievements.",
-                image:"/assets/project-img-demo.png",
-                clientName:"Client Name",
-                buttonDesign:{
-                    label:"Web Design",slug:"/"
-                },
-                buttonDev:{
-                    label:"Web Development",slug:"/"
+                buttonDev: {
+                    label: "Web Development", slug: "/"
                 },
             },
             {
-                title:"Project headline in two lines highlighting achievements.",
-                image:"/assets/project-img-demo.png",
-                clientName:"Client Name",
-                buttonDesign:{
-                    label:"Web Design",slug:"/"
+                title: "Project headline in two lines highlighting achievements.",
+                image: "/assets/project-img-demo.png",
+                clientName: "Client Name",
+                buttonDesign: {
+                    label: "Web Design", slug: "/"
                 },
-                buttonDev:{
-                    label:"Web Development",slug:"/"
+                buttonDev: {
+                    label: "Web Development", slug: "/"
+                },
+            },
+            {
+                title: "Project headline in two lines highlighting achievements.",
+                image: "/assets/project-img-demo.png",
+                clientName: "Client Name",
+                buttonDesign: {
+                    label: "Web Design", slug: "/"
+                },
+                buttonDev: {
+                    label: "Web Development", slug: "/"
+                },
+            },
+            {
+                title: "Project headline in two lines highlighting achievements.",
+                image: "/assets/project-img-demo.png",
+                clientName: "Client Name",
+                buttonDesign: {
+                    label: "Web Design", slug: "/"
+                },
+                buttonDev: {
+                    label: "Web Development", slug: "/"
                 },
             },
         ],
-        button:{
-            label:"See more work",
-            slug:"/"
+        button: {
+            label: "See more work",
+            slug: "/"
         }
+    },
+    clients: {
+        heading: "More of our amazing clients",
+        clientLinks: [
+            {
+                title: "McLaren Strategic Solutions",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Twinsights",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "LetsTransport",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Lupin Digital Health",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Analytica Chemie",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Zeel beauty",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Ather Energy",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Avaniko Technologies",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "DNA Networks",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Ekata Coffee",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Aamro Aviation - Florida",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Synqua Games",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Brunel Logistics, UK",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Budy.ai",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Trojan Ply",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Vaani IRC",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Compassdoon",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "India for Change.org",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Leeboy India",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "Qlite Global",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+            {
+                title: "GreenSol Group",
+                slug: "/",
+                image: "/assets/project-img.png",
+            },
+        ]
     }
 
 }
