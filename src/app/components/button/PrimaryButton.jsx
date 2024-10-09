@@ -1,8 +1,8 @@
 import React from "react";
 import * as styles from "../component.module.css";
 
-export default function PrimaryButton({ label, className = '', icon, ...rest }) {
-  const buttonClassName = `${styles.PrimaryButton} button-text1 ${className}`;
+export default function PrimaryButton({ label, className = '', icon, buttonwhite = false, greenBg = false, ...rest }) {
+  const buttonClassName = `${styles.PrimaryButton} button-text1 ${className} ${buttonwhite ? styles.buttonwhite : ''} ${greenBg ? styles.greenBg : ''}`;
 
   if (rest?.href) {
     return (

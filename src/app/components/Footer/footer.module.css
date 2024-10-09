@@ -1,0 +1,89 @@
+.footerContainer {
+    background: var(--gradient-1, linear-gradient(180deg, #EDEDED 0%, #072AC5 58.5%));
+    position: relative;
+    overflow: hidden;
+}
+
+.InsightHeader {
+    padding-top: 110px;
+    color: var(--color-10);
+}
+
+.InsightCardWrap {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    padding-top: 72px;
+}
+
+.insightBtn {
+    display: flex;
+    justify-content: center;
+    padding-top: 86px;
+}
+
+.footerWrapper {
+    padding: 100px 0;
+}
+
+.footerContent {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.footerContentContainer {
+    position: relative;
+    z-index: 1;
+}
+
+.footerLinks {
+    list-style-type: none;
+    color: var(--color-10);
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.footerPageLinks {
+    display: flex;
+    gap: 60px;
+}
+
+.tellusContent {
+    color: var(--color-4);
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: flex-end;
+    justify-content: flex-end;
+}
+
+.copyrightSection {
+    border-top: 1px solid rgba(255, 255, 255, 0.2);
+    padding: 36px 0;
+    color: var(--color-10);
+}
+
+.copyrightContent {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+}
+
+.termsPageLinks {
+    display: flex;
+    gap: 40px;
+    flex-direction: row;
+}
+
+.FooterAnimationLogo {
+    position: absolute;
+    bottom: -20rem;
+    width: 100%;
+}
+
+@media (max-width:1440px) {
+    .FooterAnimationLogo {
+        bottom: -11rem;
+    }
+}

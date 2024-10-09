@@ -118,8 +118,48 @@ export const HomePage = {
                 awardFor: "Silver for Avaniko Technologies",
                 awardName: "Big Bang Awards 2024",
             },
+            {
+                testimonial: "We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name: "Keerthana Reddy",
+                position: "Creator of Opportunities - BDM Avaniko Technologies"
+            },
+            {
+                image: '/assets/silver.png',
+                awardFor: "Silver for Avaniko Technologies",
+                awardName: "Big Bang Awards 2024",
+            },
+            {
+                testimonial: "We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name: "Keerthana Reddy",
+                position: "Creator of Opportunities - BDM Avaniko Technologies"
+            },
+            {
+                image: '/assets/silver.png',
+                awardFor: "Silver for Avaniko Technologies",
+                awardName: "Big Bang Awards 2024",
+            },
         ],
         slidestwo: [
+            {
+                image: '/assets/silver.png',
+                awardFor: "Silver for Avaniko Technologies",
+                awardName: "Big Bang Awards 2024",
+            },
+            {
+                testimonial: "We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name: "Keerthana Reddy",
+                position: "Creator of Opportunities - BDM Avaniko Technologies"
+            },
+            {
+                image: '/assets/silver.png',
+                awardFor: "Silver for Avaniko Technologies",
+                awardName: "Big Bang Awards 2024",
+            },
+            {
+                testimonial: "We express our sincere thanks to your entire team who made our dream website project possible. Supercode has worked as a part of our extended team with so much passion & dedication! We loved working with your team, be it creative designs or keeping up with the timelines; we couldn't have asked for a better team than Supercode!  You guys are really Superb :) ",
+                Name: "Keerthana Reddy",
+                position: "Creator of Opportunities - BDM Avaniko Technologies"
+            },
             {
                 image: '/assets/silver.png',
                 awardFor: "Silver for Avaniko Technologies",
@@ -334,3 +374,68 @@ export const HomePage = {
     }
 
 }
+
+export const FooterData = {
+    insight: {
+        heading: "The Insight Scoop",
+        insightData: [
+            {
+                image: "/assets/user-experience.png",
+                title: "USER EXPERIENCE",
+                description: "Decoding the potential of UI design for the Digital Future of India",
+            },
+            {
+                image: "/assets/web3.png",
+                title: "WEB 3",
+                description: "Decoding the potential of UI design for the Digital Future of India",
+            },
+            {
+                image: "/assets/ui-ux.png",
+                title: "UI/UX",
+                description: "Decoding the potential of UI design for the Digital Future of India",
+            }
+        ],
+        button: {
+            label: "Read Insights",
+            slug: "/"
+        }
+    },
+    FooterLogo: `<svg xmlns="http://www.w3.org/2000/svg" width="64" height="57" viewBox="0 0 64 57" fill="none">
+                <path d="M0.505448 26.2899L15.6358 1.19337C15.7351 1.02732 16 1.09635 16 1.28665V54.9126C16 55.1029 15.7351 55.1719 15.6358 55.0058L0.505448 29.9074C-0.168483 28.788 -0.168483 27.4093 0.505448 26.2899Z" fill="white"/>
+                <path d="M46.284 56.0996H17.1878C16.9967 56.0977 16.9274 55.8364 17.0941 55.7384L63.7173 28.1264C63.884 28.0284 64.0694 28.2186 63.9739 28.3896L49.4286 54.2379C48.7806 55.3907 47.5819 56.0996 46.284 56.0996Z" fill="white"/>
+                <path d="M49.4281 1.9595L63.9739 27.8096C64.0694 27.9806 63.884 28.1709 63.7173 28.0729L17.0941 0.45891C16.9274 0.36092 16.9967 0.0996133 17.1878 0.0996133H46.2851C47.5831 0.0976919 48.7819 0.806678 49.4299 1.9595H49.4281Z" fill="white"/>
+                </svg>`,
+    footerLinkssetOne: [
+        { label: "Work", slug: "/" },
+        { label: "about", slug: "/" },
+        { label: "Services", slug: "/" },
+    ],
+    footerLinkssetTwo: [
+        { label: "Careers", slug: "/" },
+        { label: "Impact", slug: "/" },
+        { label: "insights", slug: "/" },
+    ],
+    FooterMedialinks: [
+        { label: "Linkedin", slug: "/" },
+        { label: "Instagram", slug: "/" },
+        { label: "Dribbble", slug: "/" },
+    ],
+    tellUs: {
+        title: "Have a project in mind?",
+        button: {
+            label: "Tell us",
+            slug: "/",
+            icon: `<svg xmlns="http://www.w3.org/2000/svg" width="37" height="17" viewBox="0 0 37 17" fill="none">
+                    <path d="M31.9375 16.0054L35.7591 9.4383C36.0589 8.91789 36.0589 8.28184 35.7591 7.76142L31.9375 1.19434" stroke="#072AC5" stroke-width="1.2" stroke-miterlimit="10"/>
+                    <path d="M0.5 8.95605L35.5 8.95606" stroke="#072AC5" stroke-width="1.2" stroke-miterlimit="10"/>
+                    </svg>`
+        }
+    },
+    copywriteText: "© 2024 Supercode®Design",
+    termsPageLinks: [
+        { label: "Privacy", slug: "" },
+        { label: "Terms", slug: "" },
+        { label: "Sitemap", slug: "" }
+    ],
+    FooterAnimationLogo: "/assets/footeranimationLogo.png"
+} 
