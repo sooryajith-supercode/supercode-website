@@ -1,17 +1,32 @@
-.clientContainer{
+.clientContainer {
     padding-top: 80px;
 }
-.clientContentWrap{
+
+.clientContentWrap {
     padding-top: 40px;
 }
-.clientWrap {
-    position: relative; 
+
+.clientwrap {
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 5px;
 }
-.hoveredImageWrap {
+
+.linkwrap {
     position: relative;
 }
 
+.hoveredImageWrap {
+    position: absolute;
+    z-index: 1;
+    bottom: 40px;
+}
+
 .hoveredImage {
-    position:absolute;
-    top: 0;
+    max-width: 294px;
+}
+
+.clientItem {
+    position: relative;
 }

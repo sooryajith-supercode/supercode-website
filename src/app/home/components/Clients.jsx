@@ -11,11 +11,11 @@ export default function Clients({ clients }) {
             <div className="container">
                 <h2 className="text-4-med">{heading}</h2>
                 <div className={styles?.clientContentWrap}>
-                    <div className="text-1">
+                    <div className={`${styles?.clientwrap} text-1`}>
                         {clientLinks && clientLinks.length > 0 ? (
                             clientLinks.map((client, index) => (
-                                <React.Fragment key={index}>
-                                    {/* Render the hovered client image above the link */}
+                                <div key={index} className={styles?.clientItem}>
+                                    {/* Show the image above the client link when hovered */}
                                     {hoveredClient === client.title && (
                                         <div className={styles?.hoveredImageWrap}>
                                             <img src={client.image} alt={client.title} className={styles?.hoveredImage} />
@@ -23,14 +23,14 @@ export default function Clients({ clients }) {
                                     )}
                                     <Link
                                         href={client.slug}
-                                        className={`${styles?.clientWrap} text-1`}
+                                        className={`text-1`}
                                         onMouseEnter={() => setHoveredClient(client.title)}
                                         onMouseLeave={() => setHoveredClient(null)}
                                     >
                                         {client.title}
                                     </Link>
                                     {index < clientLinks.length - 1 && ' / '}
-                                </React.Fragment>
+                                </div>
                             ))
                         ) : (
                             <p>No clients available</p>
