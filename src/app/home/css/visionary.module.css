@@ -3,7 +3,7 @@
     color: var(--color-10);
 }
 .visionaryWrap{
-    height: 916px;
+    height: 1245px;
     position: relative;
 }
 .visionarycontent{
@@ -14,4 +14,10 @@
 .VisionaryDescription{
     max-width: 785px;
     width: 100%;
+}
+@media (max-width:1440px){
+    .visionaryWrap{
+        height: 916px;
+        position: relative;
+    }
 }
