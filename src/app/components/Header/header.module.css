@@ -1,18 +1,42 @@
 .NavWrap {
+    padding: 30px 0;
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    transition: background-color 0.3s ease-in-out, transform 0.3s ease-in-out;
+    will-change: transform;
+}
+
+.NavItems {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding-top: 48px;
-    position: fixed;
-    width: 90%;
-    z-index: 1;
 }
-.NavWrapLinkBtn{
+
+.NavWrapLinkBtn {
     display: flex;
     gap: 48px;
     align-items: center;
 }
-.NavWrapLink{
+
+.NavWrapLink {
     display: flex;
     gap: 40px;
+}
+
+.visible {
+    transform: translateY(0);
+    background-color: #ffffff80; /* Background when visible */
+}
+
+.hidden {
+    transform: translateY(-100%); /* Hide navbar */
+}
+
+.atTop {
+    background-color: transparent; /* Background color when at the top */
+}
+
+.notAtTop {
+    background-color: #ffffff80; /* Background color when scrolling down */
 }

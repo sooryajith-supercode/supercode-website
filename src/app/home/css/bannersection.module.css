@@ -1,25 +1,36 @@
-.BannerSection{
+.BannerSection {
     background: var(--gradient-2, radial-gradient(108.79% 107.16% at 81.74% 32.95%, #FFF 0%, #EBFFEB 28.5%, #FFC2E0 100%));
-    height:1162px;
+    height: 1162px;
 }
-.MainHeading{
+
+.BannerSectionWrap {
+    display: flex;
+    align-items: center;
+    padding-top: 280px;
+}
+
+.MainHeading {
     max-width: 1105px;
     width: 100%;
-    padding-top: 280px;
     position: relative;
     z-index: 10;
 }
-.MainHeading span{
+
+.MainHeading span {
     font-style: italic;
-    
+
 }
-.animationLogo{
-    position: absolute;
-    top: 186px;
-    right: 170px;
-}
-.bannerDescription{
+
+.bannerDescription {
     max-width: 737px;
     width: 100%;
     padding-top: 40px;
+}
+
+@media(max-width:1440px) {
+    .animationLogo {
+        position: absolute;
+        top: 186px;
+        right: 170px;
+    }
 }

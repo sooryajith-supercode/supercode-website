@@ -5,7 +5,7 @@ export default function BannerSection({ banner }) {
     return (
         <div className={styles?.BannerSection}>
             <div className='container'>
-                <div>
+                <div className={styles?.BannerSectionWrap}>
                     <div className={`${styles?.MainHeading} heading-1`} dangerouslySetInnerHTML={{ __html: MainHeading }} />
                     <div className={`${styles?.animationLogo}`} dangerouslySetInnerHTML={{ __html: AnimationLogo }} />
                 </div>

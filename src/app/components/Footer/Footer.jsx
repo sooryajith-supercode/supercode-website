@@ -1,19 +1,35 @@
-import React from 'react';
+import React, { useRef } from 'react';
 import * as styles from "./footer.module.css";
 import { FooterData } from '@/utilites/helper';
 import InsightCard from '../cards/InsightCard';
 import PrimaryButton from '../button/PrimaryButton';
 import Link from 'next/link';
-import { Canvas } from '@react-three/fiber';
+import { Canvas, useLoader, useFrame } from '@react-three/fiber';
+import { TextureLoader } from 'three';
 import { useGLTF, OrbitControls } from '@react-three/drei';
 import Image from 'next/image';
 export default function Footer() {
     const { insight, FooterLogo, footerLinkssetOne, footerLinkssetTwo, FooterMedialinks, tellUs, copywriteText, termsPageLinks, FooterAnimationLogo } = FooterData;
     const { heading, insightData, button } = insight || {};
 
-    const Model = () => {
-        const { scene } = useGLTF('/assets/supercode.gltf');
-        return <primitive object={scene} />;
+    const PNGPlane = () => {
+        const texture = useLoader(TextureLoader, '/assets/footeranimationLogo.png');
+        const planeRef = useRef();
+
+
+        useFrame(({ viewport }) => {
+            if (planeRef.current) {
+                const aspectRatio = texture.image.width / texture.image.height;
+                planeRef.current.scale.set(viewport.width, viewport.width / aspectRatio, 1);
+            }
+        });
+
+        return (
+            <mesh ref={planeRef}>
+                <planeGeometry args={[1, 1]} />
+                <meshBasicMaterial map={texture} transparent={true} />
+            </mesh>
+        );
     };
 
     return (
@@ -125,12 +141,11 @@ export default function Footer() {
                         height={647}
                     />
                 </div>
-                {/* <Canvas>
-                    <ambientLight intensity={0.5} />
-                    <directionalLight position={[5, 5, 5]} />
-                    <Model />
-                    <OrbitControls />
-                </Canvas> */}
+                {/* <div className={styles?.FooterAnimation3d}>
+                    <Canvas >
+                        <PNGPlane />
+                    </Canvas>
+                </div> */}
             </div>
         </div>
     );
