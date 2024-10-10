@@ -26,7 +26,6 @@ export default function WhatWeDo({ whatwedo }) {
                         trigger: secondCard,
                         start: "top-=200 center", 
                         toggleActions: "play reverse play reverse",
-                        
                     },
                     
                 }
