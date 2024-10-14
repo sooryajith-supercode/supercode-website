@@ -1,14 +1,27 @@
-.sectionMainWrap{
+.sectionMainWrap {
     position: relative;
 }
-.sectionMainimage img{
+
+.sectionMainimage img {
     width: 90%;
-    position:absolute;
+    position: absolute;
     top: 37%;
     border-radius: 12px;
 }
-@media (max-width:1440px){
-    .sectionMainimage img{
+
+.resultsWrapLogo {
+    position: absolute;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+.AnimationLogoWrapcontent {
+    backdrop-filter: blur(5px);
+}
+
+@media (max-width:1440px) {
+    .sectionMainimage img {
         top: 40%;
     }
 }

@@ -1,5 +1,7 @@
 .clientContainer {
     padding: 80px  0;
+    background-color: white;
+    position: relative;
 }
 
 .clientContentWrap {

@@ -1,10 +1,11 @@
 .resultsWrap {
     background: rgba(64, 81, 74, 0.10);
     backdrop-filter: blur(5px);
+    padding-top: 90px;
 }
 
 .resultsMainHeading {
-    padding-top: 200px;
+    padding-top: 80px;
 }
 
 .resultsWrapLogo {
@@ -13,10 +14,6 @@
     justify-content: center;
 }
 
-.resultsWrapLogo img {
-    position: absolute;
-    padding-top: 50px;
-}
 
 .SliderContentWrap {
     padding: 42px 46px;
