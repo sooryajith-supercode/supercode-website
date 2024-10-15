@@ -26,17 +26,18 @@
 
 .visible {
     transform: translateY(0);
-    background-color: #ffffff80; /* Background when visible */
+    background-color: #ffffff80; 
 }
 
 .hidden {
-    transform: translateY(-100%); /* Hide navbar */
+    transform: translateY(-100%); 
 }
 
 .atTop {
-    background-color: transparent; /* Background color when at the top */
+    background-color: transparent;
 }
 
 .notAtTop {
-    background-color: #ffffff80; /* Background color when scrolling down */
+    background-color: #ffffff80; 
+    z-index: 10;
 }

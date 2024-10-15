@@ -1,7 +1,9 @@
-import React from 'react'
-import * as styles from "../css/bannersection.module.css"
-export default function BannerSection({ banner }) {
+import React from 'react';
+import * as styles from "../css/bannersection.module.css";
+
+const BannerSection = React.memo(({ banner }) => {
     const { MainHeading, AnimationLogo, bannerDescription } = banner || {};
+
     return (
         <div className={styles?.BannerSection}>
             <div className='container'>
@@ -14,5 +16,7 @@ export default function BannerSection({ banner }) {
                 </div>
             </div>
         </div>
-    )
-}
+    );
+});
+
+export default BannerSection;

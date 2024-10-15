@@ -1,3 +1,4 @@
+"use client"
 import React, { useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -19,9 +20,9 @@ export default function Home() {
     const [rotationY, setRotationY] = useState(0);
     const animationWrapRef = useRef(null);
     const resultsWrapLogoRef = useRef(null);
-    
-    const rotationSpeed = 0.1; 
-    const autoRotationSpeed = 0.3; 
+    const [bgColor, setBgColor] = useState('#fff');
+    const rotationSpeed = 0.1;
+    const autoRotationSpeed = 0.3;
 
     useEffect(() => {
         const canvas = canvasRef.current;
@@ -113,20 +114,39 @@ export default function Home() {
 
     useEffect(() => {
         const imageElement = document.querySelector(`.${styles.sectionMainimage} img`);
-
-        gsap.fromTo(imageElement,
-            { width: '300px', y: 0 },
-            {
-                width: '90%',
-                scrollTrigger: {
-                    trigger: imageElement,
-                    start: 'top-=300px center',
-                    end: 'bottom+=200px center',
-                    scrub: true,
-                }
+        const sectionMainWrap = document.querySelector(`.${styles.sectionMainWrap}`);
+        const sectionBanner = document.querySelector(`.${styles.sectionBanner}`);
+    
+        if (!imageElement || !sectionMainWrap || !sectionBanner) {
+            console.error('Elements not found!');
+            return;
+        }
+        gsap.set(`.${styles.sectionMainWrap}`,{background:'transparent'});
+        gsap.set(`.${styles.sectionBanner}`,{opacity:'1'});
+        const tl = gsap.timeline({
+            scrollTrigger: {
+                trigger: imageElement,
+                start: 'top-=300px center',
+                end: 'bottom+=200px center',
+                scrub: true,
             }
+        });
+      
+        tl.fromTo(imageElement,
+            { width: '300px', y: 0 },
+            { width: '90%' }
         );
+        tl
+        .to(sectionBanner, {
+            opacity: '0',
+            duration: 0.3 
+        }, 0) 
+        .to(sectionMainWrap, {
+            background: 'black',
+            duration: 0.3 
+        }, 0); 
     }, []);
+    
 
     useEffect(() => {
         const animationWrap = resultsWrapLogoRef.current;
@@ -150,7 +170,9 @@ export default function Home() {
     return (
         <div>
             <div className={`${styles.sectionMainWrap}`}>
-                <BannerSection banner={banner} />
+                <div className={`${styles.sectionBanner}`}>
+                    <BannerSection banner={banner} />
+                </div>
                 <Visionary visionary={visionary} />
 
                 <div className='container'>
