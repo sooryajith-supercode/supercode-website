@@ -1,7 +1,6 @@
 .resultsWrap {
     background: rgba(64, 81, 74, 0.10);
     backdrop-filter: blur(5px);
-    padding-top: 90px;
 }
 
 .resultsMainHeading {
@@ -57,6 +56,7 @@
 .customSwiper {
     padding-top: 40px;
 }
+
 .customSwiperTwo {
     padding-top: 20px;
 }
@@ -176,6 +176,7 @@
     width: 100%;
     height: 320px;
 }
+
 .customSwiperTwo .slide-4 {
 
     max-width: 404px;
@@ -200,20 +201,25 @@
     width: 100%;
     height: 320px;
 }
-.impactButtonWrap{
+
+.impactButtonWrap {
     width: 100%;
     text-align: center;
     padding-top: 72px;
 }
+
 .customSwiper {
     cursor: url('/assets/swiper-arrow.png'), auto;
 }
+
 .customSwiper:hover {
-    cursor: url('/assets/swiper-arrow.png'); 
+    cursor: url('/assets/swiper-arrow.png');
 }
+
 .customSwiperTwo {
     cursor: url('/assets/swiper-arrow.png'), auto;
 }
+
 .customSwiperTwo:hover {
-    cursor: url('/assets/swiper-arrow.png'); 
+    cursor: url('/assets/swiper-arrow.png');
 }

@@ -116,13 +116,13 @@ export default function Home() {
         const imageElement = document.querySelector(`.${styles.sectionMainimage} img`);
         const sectionMainWrap = document.querySelector(`.${styles.sectionMainWrap}`);
         const sectionBanner = document.querySelector(`.${styles.sectionBanner}`);
-    
+
         if (!imageElement || !sectionMainWrap || !sectionBanner) {
             console.error('Elements not found!');
             return;
         }
-        gsap.set(`.${styles.sectionMainWrap}`,{background:'transparent'});
-        gsap.set(`.${styles.sectionBanner}`,{opacity:'1'});
+        gsap.set(`.${styles.sectionMainWrap}`, { background: 'transparent' });
+        gsap.set(`.${styles.sectionBanner}`, { opacity: '1' });
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: imageElement,
@@ -131,22 +131,22 @@ export default function Home() {
                 scrub: true,
             }
         });
-      
+
         tl.fromTo(imageElement,
             { width: '300px', y: 0 },
             { width: '90%' }
         );
         tl
-        .to(sectionBanner, {
-            opacity: '0',
-            duration: 0.3 
-        }, 0) 
-        .to(sectionMainWrap, {
-            background: 'black',
-            duration: 0.3 
-        }, 0); 
+            .to(sectionBanner, {
+                opacity: '0',
+                duration: 0.3
+            }, 0)
+            .to(sectionMainWrap, {
+                background: 'black',
+                duration: 0.3
+            }, 0);
     }, []);
-    
+
 
     useEffect(() => {
         const animationWrap = resultsWrapLogoRef.current;
@@ -181,13 +181,15 @@ export default function Home() {
                     </div>
                 </div>
             </div>
-            <WhatWeDo whatwedo={whatwedo} />
+
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
+
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
                         <canvas ref={canvasRef} width="500" height="500"></canvas>
                     </div>
                     <div className={styles?.AnimationLogoWrapcontent}>
+                        <WhatWeDo whatwedo={whatwedo} />
                         <Results results={results} />
                         <SuperHits superhits={superhits} />
                     </div>
