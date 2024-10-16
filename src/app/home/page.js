@@ -1,4 +1,3 @@
-"use client";
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -22,6 +21,7 @@ export default function Home() {
     const resultsWrapLogoRef = useRef(null);
     const [scrollSpeedBoost, setScrollSpeedBoost] = useState(0); // State to control scroll-based speed boost
     const speedBoostTimeout = useRef(null);
+    const currentSpeedBoost = useRef(0); // Ref to store the current speed boost
 
     useEffect(() => {
         const imageElement = document.querySelector(`.${styles.sectionMainimage} img`);
@@ -89,41 +89,52 @@ export default function Home() {
         scene.scale.set(2, 2, 2);
         scene.position.set(-center.x, -center.y, 0);
 
+        // Store the current rotation speed
+        const rotationSpeedRef = useRef(0.005); 
+        const speedBoostTimeout = useRef(null);
+
         useFrame(() => {
-            const automaticRotationSpeed = 0.005; // Slow auto-rotation speed
-
-            // Apply auto-rotation plus temporary scroll-based speed boost
-            scene.rotation.x += automaticRotationSpeed + scrollSpeedBoost;
-            scene.rotation.y += automaticRotationSpeed + scrollSpeedBoost;
-
+            // Apply rotation using GSAP's to function
+            gsap.to(scene.rotation, {
+                x: scene.rotation.x + rotationSpeedRef.current,
+                y: scene.rotation.y + rotationSpeedRef.current,
+                duration: 0.1, 
+                ease: "power1.inOut", 
+            });
         });
 
+        // Handle scroll event to set rotation based on scroll position
+        useEffect(() => {
+            const handleScroll = () => {
+                const speedBoost = 0.1; // Increased speed during scroll 
+                rotationSpeedRef.current = speedBoost;
+
+                // Reset speed after scrolling stops
+                if (speedBoostTimeout.current) clearTimeout(speedBoostTimeout.current);
+
+                speedBoostTimeout.current = setTimeout(() => {
+                    // Gradually reduce speed using GSAP
+                    gsap.to(rotationSpeedRef, {
+                        current: 0.03, // Adjust non-scroll speed
+                        duration: 1, 
+                        ease: "power1.inOut",
+                        onUpdate: () => {
+                            rotationSpeedRef.current = rotationSpeedRef.current; 
+                        }
+                    });
+                }, 10); // Delay before starting decay to allow some scroll time
+            };
+
+            window.addEventListener('scroll', handleScroll);
+            return () => {
+                window.removeEventListener('scroll', handleScroll);
+                if (speedBoostTimeout.current) clearTimeout(speedBoostTimeout.current);
+            };
+        }, []);
         return <primitive object={scene} />;
     };
 
-    // Handle scroll event to set rotation based on scroll position
-    useEffect(() => {
-        const handleScroll = () => {
-            
-            const speedBoost = 0.02; // Increase speed faster during scroll
-            setScrollSpeedBoost(speedBoost); 
 
-         
-            if (speedBoostTimeout.current) clearTimeout(speedBoostTimeout.current);
-
-            
-            speedBoostTimeout.current = setTimeout(() => {
-                setScrollSpeedBoost(0); // Immediately reset to slow speed when scrolling stops
-            }, 10); 
-        };
-
-        window.addEventListener('scroll', handleScroll);
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-            if (speedBoostTimeout.current) clearTimeout(speedBoostTimeout.current);
-        };
-
-    }, []);
 
     return (
         <div>
@@ -148,12 +159,10 @@ export default function Home() {
                             <pointLight
                                 position={[1, 1, 1]}
                                 intensity={0.8}
-
                             />
                             <pointLight
                                 position={[-1, -1, -1]}
                                 intensity={0.8}
-
                             />
                             <Suspense fallback={null}>
                                 <WhiteLogoModel />
