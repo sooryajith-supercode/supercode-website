@@ -115,7 +115,7 @@ export default function Home() {
                 speedBoostTimeout.current = setTimeout(() => {
                     // Gradually reduce speed using GSAP
                     gsap.to(rotationSpeedRef, {
-                        current: 0.03, // Adjust non-scroll speed
+                        current: 0.02, // Adjust non-scroll speed
                         duration: 1, 
                         ease: "power1.inOut",
                         onUpdate: () => {
@@ -153,7 +153,6 @@ export default function Home() {
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
-                        <div></div>
                         <Canvas >
                             <ambientLight intensity={0.9} />
                             <pointLight
@@ -168,7 +167,7 @@ export default function Home() {
                                 <WhiteLogoModel />
                             </Suspense>
                             <OrbitControls />
-                            <PerspectiveCamera makeDefault position={[0, 0, 0.3]} />
+                            <PerspectiveCamera makeDefault  position={[0, 0, 0.3]} far={10000}/>
                         </Canvas>
                     </div>
                     <div className={styles?.AnimationLogoWrapcontent}>
