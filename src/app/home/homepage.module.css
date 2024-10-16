@@ -11,8 +11,10 @@
 
 .resultsWrapLogo {
     position: absolute;
+    height: 400px;
     width: 100%;
     display: flex;
+    padding-top: 100px;
     justify-content: center;
 }
 

@@ -1,7 +1,9 @@
-"use client"
-import React, { useEffect, useRef, useState } from 'react';
+"use client";
+import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { Canvas, useFrame } from '@react-three/fiber';
+import { OrbitControls, useGLTF, PerspectiveCamera } from '@react-three/drei';
 import * as styles from "./homepage.module.css";
 import BannerSection from './components/BannerSection';
 import { HomePage } from '@/utilites/helper';
@@ -10,107 +12,16 @@ import WhatWeDo from './components/WhatWeDo';
 import Results from './components/Results';
 import SuperHits from './components/SuperHits';
 import Clients from './components/Clients';
+import * as THREE from 'three';
 
 gsap.registerPlugin(ScrollTrigger);
 
 export default function Home() {
     const { banner, visionary, whatwedo, results, superhits, clients } = HomePage || {};
-    const canvasRef = useRef(null);
-    const [rotationX, setRotationX] = useState(0);
-    const [rotationY, setRotationY] = useState(0);
     const animationWrapRef = useRef(null);
     const resultsWrapLogoRef = useRef(null);
-    const [bgColor, setBgColor] = useState('#fff');
-    const rotationSpeed = 0.1;
-    const autoRotationSpeed = 0.3;
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const img = new window.Image();
-        img.src = '/assets/result-sec-logo.png';
-
-        img.onload = () => {
-            drawImage(ctx, img, rotationX, rotationY);
-        };
-
-        img.onerror = () => {
-            console.error('Image failed to load. Check the image path.');
-        };
-
-        const handleScroll = () => {
-            const scrolled = window.scrollY;
-            const newRotationX = (scrolled * rotationSpeed) % 360;
-            const newRotationY = (scrolled * rotationSpeed * 0.5) % 360;
-
-            setRotationX(newRotationX);
-            setRotationY(newRotationY);
-        };
-
-        window.addEventListener('scroll', handleScroll);
-
-        // Smooth scroll effect using GSAP
-        gsap.to(window, {
-            scrollTo: { y: 0, autoKill: false },
-            duration: 0.5,
-            ease: 'power1.inOut'
-        });
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
-    }, []);
-
-    useEffect(() => {
-        let animationFrameId;
-
-        const animate = () => {
-            setRotationX(prevRotation => (prevRotation + autoRotationSpeed) % 360);
-            setRotationY(prevRotation => (prevRotation + autoRotationSpeed * 0.5) % 360);
-            animationFrameId = requestAnimationFrame(animate);
-        };
-
-        animationFrameId = requestAnimationFrame(animate);
-
-        return () => {
-            cancelAnimationFrame(animationFrameId);
-        };
-    }, []);
-
-    useEffect(() => {
-        const canvas = canvasRef.current;
-        const ctx = canvas.getContext('2d');
-        const img = new window.Image();
-        img.src = '/assets/result-sec-logo.png';
-
-        img.onload = () => {
-            drawImage(ctx, img, rotationX, rotationY);
-        };
-    }, [rotationX, rotationY]);
-
-    const drawImage = (ctx, img, rotationX, rotationY) => {
-        const centerX = ctx.canvas.width / 2;
-        const centerY = ctx.canvas.height / 2;
-
-        ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
-
-        ctx.save();
-        ctx.translate(centerX, centerY);
-
-        const scaleY = Math.cos(rotationY * Math.PI / 180);
-        const scaleX = 1;
-
-        ctx.scale(scaleX, scaleY);
-        ctx.rotate((rotationX * Math.PI) / 180);
-
-        const scaleWidth = ctx.canvas.width / img.width;
-        const scaleHeight = ctx.canvas.height / img.height;
-        const scale = Math.min(scaleWidth, scaleHeight);
-
-        ctx.drawImage(img, -img.width / 2 * scale, -img.height / 2 * scale, img.width * scale, img.height * scale);
-
-        ctx.restore();
-    };
+    const [scrollSpeedBoost, setScrollSpeedBoost] = useState(0); // State to control scroll-based speed boost
+    const speedBoostTimeout = useRef(null);
 
     useEffect(() => {
         const imageElement = document.querySelector(`.${styles.sectionMainimage} img`);
@@ -121,8 +32,10 @@ export default function Home() {
             console.error('Elements not found!');
             return;
         }
+
         gsap.set(`.${styles.sectionMainWrap}`, { background: 'transparent' });
         gsap.set(`.${styles.sectionBanner}`, { opacity: '1' });
+
         const tl = gsap.timeline({
             scrollTrigger: {
                 trigger: imageElement,
@@ -147,7 +60,6 @@ export default function Home() {
             }, 0);
     }, []);
 
-
     useEffect(() => {
         const animationWrap = resultsWrapLogoRef.current;
         const animationLogoWrap = animationWrapRef.current;
@@ -167,6 +79,52 @@ export default function Home() {
         };
     }, []);
 
+    // Component to render GLB model
+    const WhiteLogoModel = () => {
+        const { scene } = useGLTF('/assets/WhiteInflateLogo.gltf');
+        const box = new THREE.Box3().setFromObject(scene);
+        const center = box.getCenter(new THREE.Vector3());
+
+        // Scale the model up to make it visible
+        scene.scale.set(2, 2, 2);
+        scene.position.set(-center.x, -center.y, 0);
+
+        useFrame(() => {
+            const automaticRotationSpeed = 0.005; // Slow auto-rotation speed
+
+            // Apply auto-rotation plus temporary scroll-based speed boost
+            scene.rotation.x += automaticRotationSpeed + scrollSpeedBoost;
+            scene.rotation.y += automaticRotationSpeed + scrollSpeedBoost;
+
+        });
+
+        return <primitive object={scene} />;
+    };
+
+    // Handle scroll event to set rotation based on scroll position
+    useEffect(() => {
+        const handleScroll = () => {
+            
+            const speedBoost = 0.02; // Increase speed faster during scroll
+            setScrollSpeedBoost(speedBoost); 
+
+         
+            if (speedBoostTimeout.current) clearTimeout(speedBoostTimeout.current);
+
+            
+            speedBoostTimeout.current = setTimeout(() => {
+                setScrollSpeedBoost(0); // Immediately reset to slow speed when scrolling stops
+            }, 10); 
+        };
+
+        window.addEventListener('scroll', handleScroll);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            if (speedBoostTimeout.current) clearTimeout(speedBoostTimeout.current);
+        };
+
+    }, []);
+
     return (
         <div>
             <div className={`${styles.sectionMainWrap}`}>
@@ -174,7 +132,6 @@ export default function Home() {
                     <BannerSection banner={banner} />
                 </div>
                 <Visionary visionary={visionary} />
-
                 <div className='container'>
                     <div className={`${styles.sectionMainimage}`}>
                         <img src="/assets/bannerimage.jpg" alt="Description of the image" />
@@ -184,9 +141,26 @@ export default function Home() {
 
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
-
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
-                        <canvas ref={canvasRef} width="500" height="500"></canvas>
+                        <div></div>
+                        <Canvas >
+                            <ambientLight intensity={0.9} />
+                            <pointLight
+                                position={[1, 1, 1]}
+                                intensity={0.8}
+
+                            />
+                            <pointLight
+                                position={[-1, -1, -1]}
+                                intensity={0.8}
+
+                            />
+                            <Suspense fallback={null}>
+                                <WhiteLogoModel />
+                            </Suspense>
+                            <OrbitControls />
+                            <PerspectiveCamera makeDefault position={[0, 0, 0.3]} />
+                        </Canvas>
                     </div>
                     <div className={styles?.AnimationLogoWrapcontent}>
                         <WhatWeDo whatwedo={whatwedo} />
