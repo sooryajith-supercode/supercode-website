@@ -6,31 +6,13 @@ import PrimaryButton from '../button/PrimaryButton';
 import Link from 'next/link';
 import { Canvas, useLoader, useFrame } from '@react-three/fiber';
 import { TextureLoader } from 'three';
-import { useGLTF, OrbitControls } from '@react-three/drei';
+import { gsap } from 'gsap';
+import { useGLTF, OrbitControls, Environment } from '@react-three/drei';
 import Image from 'next/image';
+import { BlueINflateLogo } from '../AnimationLOgo/BlueInflateLogo';
 export default function Footer() {
     const { insight, FooterLogo, footerLinkssetOne, footerLinkssetTwo, FooterMedialinks, tellUs, copywriteText, termsPageLinks, FooterAnimationLogo } = FooterData;
     const { heading, insightData, button } = insight || {};
-
-    const PNGPlane = () => {
-        const texture = useLoader(TextureLoader, '/assets/footeranimationLogo.png');
-        const planeRef = useRef();
-
-
-        useFrame(({ viewport }) => {
-            if (planeRef.current) {
-                const aspectRatio = texture.image.width / texture.image.height;
-                planeRef.current.scale.set(viewport.width, viewport.width / aspectRatio, 1);
-            }
-        });
-
-        return (
-            <mesh ref={planeRef}>
-                <planeGeometry args={[1, 1]} />
-                <meshBasicMaterial map={texture} transparent={true} />
-            </mesh>
-        );
-    };
 
     return (
         <div className={`${styles?.footerContainer}`}>
@@ -134,18 +116,26 @@ export default function Footer() {
             </div>
             <div className={styles?.FooterAnimationLogo}>
                 <div className="container">
-                    <Image
-                        src={FooterAnimationLogo}
-                        layout="responsive"
-                        width={500}
-                        height={647}
-                    />
+
+                    <div className={styles?.FooterAnimation3d}>
+                        <Canvas camera={{ position: [0, 0, 5], fov: .6 }} >
+                            <ambientLight intensity={1} />
+                            <directionalLight
+                                intensity={1}
+                                
+                            />
+                            <OrbitControls  />
+                            <axesHelper args={[3]} />
+                            <BlueINflateLogo
+                                rotation={[Math.PI / 1.8, Math.PI, Math.PI / -15]}
+                                position={[0, 0, 0]}
+                                scale={[1, 1, 1]}
+                               
+                            />
+                        </Canvas>
+
+                    </div>
                 </div>
-                {/* <div className={styles?.FooterAnimation3d}>
-                    <Canvas >
-                        <PNGPlane />
-                    </Canvas>
-                </div> */}
             </div>
         </div>
     );

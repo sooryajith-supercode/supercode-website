@@ -83,14 +83,16 @@
 }
 
 .FooterAnimation3d {
-    position: absolute;
     bottom: 0;
-    height: 100%;
-    margin-bottom: -636px;
+    height: 450px;
+}
+.FooterAnimation3d div{
+    display: flex;
+    justify-content: center;
 }
 
 @media (max-width:1440px) {
     .FooterAnimationLogo {
-        bottom: -11rem;
+        bottom: -12rem;
     }
 }
