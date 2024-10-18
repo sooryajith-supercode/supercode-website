@@ -78,21 +78,34 @@
 
 .FooterAnimationLogo {
     position: absolute;
-    bottom: -20rem;
+    bottom: -23rem;
     width: 100%;
 }
 
 .FooterAnimation3d {
     bottom: 0;
-    height: 450px;
+    height: 763px;
 }
 .FooterAnimation3d div{
     display: flex;
     justify-content: center;
 }
-
+.rotationControl{
+    position: fixed;
+    top: 200px;
+    z-index: 10;
+}
+.cameraControl{
+    position: fixed;
+    top: 200px;
+    z-index: 10;
+    right: 0;
+}
 @media (max-width:1440px) {
     .FooterAnimationLogo {
-        bottom: -12rem;
+        bottom: -16rem;
+    }
+    .FooterAnimation3d {
+        height: 498px;
     }
 }
