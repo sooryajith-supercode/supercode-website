@@ -9,9 +9,9 @@ export default function Clients({ clients }) {
     return (
         <div className={styles?.clientContainer}>
             <div className="container">
-                <h2 className="text-4-med">{heading}</h2>
+                <h2 className="text-4-med textClrBlack">{heading}</h2>
                 <div className={styles?.clientContentWrap}>
-                    <div className={`${styles?.clientwrap} text-1`}>
+                    <div className={`${styles?.clientwrap} text-1 textClrBlack`}>
                         {clientLinks && clientLinks.length > 0 ? (
                             clientLinks.map((client, index) => (
                                 <div key={index} className={styles?.clientItem}>
@@ -23,7 +23,7 @@ export default function Clients({ clients }) {
                                     )}
                                     <Link
                                         href={client.slug}
-                                        className={`text-1`}
+                                        className={`text-1 textClrBlack`}
                                         onMouseEnter={() => setHoveredClient(client.title)}
                                         onMouseLeave={() => setHoveredClient(null)}
                                     >

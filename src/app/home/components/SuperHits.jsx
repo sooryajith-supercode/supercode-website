@@ -7,7 +7,7 @@ export default function SuperHits({ superhits }) {
     return (
         <div className={styles?.superHitsWrap}>
             <div className="container">
-                <h2 className="heading-3">{heading}</h2>
+                <h2 className="heading-3 textClrBlack">{heading}</h2>
 
                 <div className={styles?.ProjectsWrap}>
                     <SuperHitCard data={hitprojects} />

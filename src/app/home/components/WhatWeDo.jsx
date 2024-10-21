@@ -53,7 +53,7 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
         <div>
             <div className={`${styles?.whatwedoHeading}`}>
                 <div className="container">
-                    <h2 className="text-4-med">{heading}</h2>
+                    <h2 className="text-4-med textClrBlack">{heading}</h2>
                 </div>
             </div>
             <div className={styles?.ServiceCardWrap} ref={cardwrapRef}>
@@ -68,8 +68,8 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                         >
                             <div className={`${styles?.ServiceCardText} container`}>
                                 <div className={`${styles?.ServiceCardTextContent}`}>
-                                    <p className="heading-3">{e.heading}</p>
-                                    <p className={`${styles?.ServiceCarddesc} text-5`}>{e.description}</p>
+                                    <p className="heading-3 textClrBlack">{e.heading}</p>
+                                    <p className={`${styles?.ServiceCarddesc} text-5 textClrBlack`}>{e.description}</p>
                                 </div>
                                 <div
                                     className={styles?.ServiceCardIcon}

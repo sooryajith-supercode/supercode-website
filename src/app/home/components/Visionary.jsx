@@ -8,7 +8,7 @@ export default function Visionary({ visionary = {} }) {
         <div className={`${styles?.visionaryWrap}`}>
             <div className='container'>
                 <div className={`${styles?.visionarycontent}`}>
-                    <p className={`${styles?.VisionaryDescription} text-1`}>{description}</p>
+                    <p className={`${styles?.VisionaryDescription} text-1 textClrBlack`}>{description}</p>
                 </div>
             </div>
         </div>

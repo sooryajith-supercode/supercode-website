@@ -26,7 +26,7 @@ export default function Results({ results }) {
             <div className={`${styles?.resultsWrap}`}>
                 <div className="container">
                     <div className={`${styles?.resultsMainHeading}`}>
-                        <h2 className="heading-5-med">{heading}</h2>
+                        <h2 className="heading-5-med textClrBlack">{heading}</h2>
                     </div>
                 </div>
                 {slides && slides.length > 0 ? (
@@ -47,10 +47,10 @@ export default function Results({ results }) {
                             <SwiperSlide key={index} className={`${styles[`slide-${index}`]}`}>
                                 <div className={`${styles?.SliderContentWrap} slide-content`} style={{ backgroundColor: getSlideColor(index) }}>
                                     <div className={styles?.testimonialContent}>
-                                        {slide.testimonial && <p className={`${styles?.testimonialDesc} text-5`}>{slide.testimonial}</p>}
+                                        {slide.testimonial && <p className={`${styles?.testimonialDesc} text-5 textClrBlack`}>{slide.testimonial}</p>}
                                         <div className={styles?.NamePosition}>
-                                            {slide.Name && <h4 className="text-6-med">{slide.Name}</h4>}
-                                            {slide.position && <p className={styles?.position}>{slide.position}</p>}
+                                            {slide.Name && <h4 className="text-6-med textClrBlack">{slide.Name}</h4>}
+                                            {slide.position && <p className={`${styles?.position} textClrBlack`}>{slide.position}</p>}
                                         </div>
                                     </div>
                                     <div className={styles?.awardContent}>
@@ -63,8 +63,8 @@ export default function Results({ results }) {
                                             />
                                         )}
                                         <div className={styles?.awardinfo}>
-                                            {slide.awardFor && <p className={styles?.awardFor}>{slide.awardFor}</p>}
-                                            {slide.awardName && <p className={styles?.awardName}>{slide.awardName}</p>}
+                                            {slide.awardFor && <p className={`${styles?.awardFor} textClrBlack`}>{slide.awardFor}</p>}
+                                            {slide.awardName && <p className={`${styles?.awardName} textClrBlack`}>{slide.awardName}</p>}
                                         </div>
                                     </div>
                                 </div>
@@ -92,9 +92,9 @@ export default function Results({ results }) {
                             <SwiperSlide key={index} className={`${styles[`slide-${index}`]}`}>
                                 <div className={`${styles?.SliderContentWrap} slide-content`} style={{ backgroundColor: getSlidetwoColor(index) }}>
                                     <div className={styles?.testimonialContent}>
-                                        {slide.testimonial && <p className={`${styles?.testimonialDesc} text-5`}>{slide.testimonial}</p>}
+                                        {slide.testimonial && <p className={`${styles?.testimonialDesc} text-5 textClrBlack`}>{slide.testimonial}</p>}
                                         <div className={styles?.NamePosition}>
-                                            {slide.Name && <h4 className="text-6-med">{slide.Name}</h4>}
+                                            {slide.Name && <h4 className="text-6-med textClrBlack">{slide.Name}</h4>}
                                             {slide.position && <p className={styles?.position}>{slide.position}</p>}
                                         </div>
                                     </div>
@@ -108,8 +108,8 @@ export default function Results({ results }) {
                                             />
                                         )}
                                         <div className={styles?.awardinfo}>
-                                            {slide.awardFor && <p className={styles?.awardFor}>{slide.awardFor}</p>}
-                                            {slide.awardName && <p className={styles?.awardName}>{slide.awardName}</p>}
+                                            {slide.awardFor && <p className={`${styles?.awardFor} textClrBlack`}>{slide.awardFor}</p>}
+                                            {slide.awardName && <p className={`${styles?.awardName} textClrBlack`}>{slide.awardName}</p>}
                                         </div>
                                     </div>
                                 </div>
