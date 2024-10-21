@@ -1,7 +1,8 @@
 .footerContainer {
-    background: var(--gradient-1, linear-gradient(180deg, #EDEDED 0%, #072AC5 58.5%));
+    /* background: var(--gradient-1, linear-gradient(180deg, #EDEDED 0%, #072AC5 58.5%)); */
     position: relative;
     overflow: hidden;
+    transition: background-color 0.2s ease;
 }
 
 .InsightHeader {

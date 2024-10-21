@@ -17,6 +17,7 @@
 
 .SliderContentWrap {
     padding: 42px 46px;
+    border-radius: 14px;
 }
 
 .testimonialContent {
@@ -59,7 +60,7 @@
 }
 
 .customSwiperTwo {
-    padding-top: 20px;
+    padding-top: 8px;
 }
 
 .slide-content {

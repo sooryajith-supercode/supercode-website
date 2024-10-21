@@ -23,7 +23,6 @@ export default function Home() {
     const resultsWrapLogoRef = useRef(null);
     const [scrollSpeedBoost, setScrollSpeedBoost] = useState(0); // State to control scroll-based speed boost
     const speedBoostTimeout = useRef(null);
-    const currentSpeedBoost = useRef(0); // Ref to store the current speed boost
 
     useEffect(() => {
         const imageElement = document.querySelector(`.${styles.sectionMainimage} img`);
@@ -82,62 +81,53 @@ export default function Home() {
     }, []);
 
 
-    const AutoRotateLogo = ({ defaultScale }) => {
+    const AutoRotateLogo = () => {
         const logoRef = useRef();
-        const [rotationSpeed, setRotationSpeed] = useState(0.01); // Initial speed
-        const [scale, setScale] = useState(2.1); // Initial scale 
+        const rotationSpeedX = 0.005; // speed for X-axis rotation
 
-        // Update the logo's rotation and scale in the animation frame
+        // Set initial scale
+        const initialScale = 8; 
         useFrame(() => {
             if (logoRef.current) {
-                logoRef.current.rotation.x += rotationSpeed; 
-                logoRef.current.rotation.y += rotationSpeed; 
-                logoRef.current.scale.set(scale, scale, scale); 
+                // Continuous rotation around the X-axis
+                logoRef.current.rotation.x += rotationSpeedX;
             }
         });
 
-        const handleScroll = () => {
-            // When scrolling, set speed to 3 and scale to 1.5
-            setRotationSpeed(0.02);
-            setScale(2.1);
-        };
-
-        const handleStopScroll = () => {
-            // When not scrolling, 
-            setRotationSpeed(0.01);
-
-            setTimeout(() => {
-                setScale(2.1); // Reset scale to default
-            }, 500); // Adjust this duration for smoothness
-        };
-
         useEffect(() => {
-            let isScrolling;
+            let lastScrollPos = 0;
 
-            window.addEventListener('scroll', () => {
-                handleScroll();
+            const handleScroll = () => {
+                const currentScrollPos = window.scrollY;
+                const scrollDelta = currentScrollPos - lastScrollPos; // Calculate scroll change
 
-                // Clear previous timeout
-                clearTimeout(isScrolling);
+                // Reverse rotation direction based on scroll
+                const yRotationSpeed = scrollDelta > 0 ? 0.02 : (scrollDelta < 0 ? -0.02 : 0);
 
-                // Set a timeout to run when scrolling ends
-                isScrolling = setTimeout(() => {
-                    handleStopScroll();
-                }, 200);
-            });
+                // Use GSAP to animate the Y-axis rotation
+                gsap.to(logoRef.current.rotation, {
+                    y: `+=${yRotationSpeed}`,
+                    duration: 0.05,
+                    ease: 'power1.out',
+                    overwrite: 'auto', 
+                });
 
+                lastScrollPos = currentScrollPos; 
+            };
+
+            // Add scroll event listener
+            window.addEventListener('scroll', handleScroll);
             return () => {
                 window.removeEventListener('scroll', handleScroll);
             };
         }, []);
 
         return (
-            <mesh ref={logoRef} >
-                <WhiteInflateLogo  />
+            <mesh ref={logoRef} scale={[initialScale, initialScale, initialScale]} position={[0, 0, 0]}>
+                <WhiteInflateLogo />
             </mesh>
-        ); 
+        );
     };
-
 
     const bannerSection = useMemo(() => <BannerSection banner={banner} />, [banner])
 
@@ -164,7 +154,7 @@ export default function Home() {
                             <pointLight position={[-1, -1, -1]} intensity={2.5} />
                             <directionalLight position={[0, 1, 2]} intensity={2} castShadow={true} />
                             <AutoRotateLogo />
-                            <PerspectiveCamera makeDefault position={[0, 0, .35]}  />
+                            <PerspectiveCamera makeDefault position={[0, 0, 2]} fov={32} near={0.1} far={500} />
                         </Canvas>
                     </div>
                     <div className={styles?.AnimationLogoWrapcontent}>

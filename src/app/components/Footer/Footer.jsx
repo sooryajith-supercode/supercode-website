@@ -40,32 +40,26 @@ export default function Footer() {
     const [rotation, setRotation] = useState([0, 0, 0]);
     const [cameraPosition, setCameraPosition] = useState([5, 0, 5]);
     const footerRef = useRef(null);
+
     useEffect(() => {
+        // Register ScrollTrigger
+        gsap.registerPlugin(ScrollTrigger);
+
         // GSAP scroll animation for the footer container
         const scrollAnimation = gsap.to(footerRef.current, {
+            backgroundColor: "#072AC5", // Change this to your desired color
             scrollTrigger: {
-                trigger: footerRef.current, // The element to trigger the animation
-                start: "top top", // Start animation when .footerContainer reaches the top
-                end: "bottom bottom", // End when 100% more of .footerContainer is scrolled through
-                scrub: true, // Smooth animation based on scroll
+                trigger: footerRef.current,
+                start: "top center+=300", 
+                end: "bottom bottom", 
+                scrub: true, 
+                // markers: true,
             },
         });
 
-        // GSAP animation for 3D logo when footerContainer is scrolled
-        const logoAnimation = gsap.timeline({
-            scrollTrigger: {
-                trigger: ".FooterAnimation3d",
-                start: "top top", // Starts when .FooterAnimation3d hits the bottom of the viewport
-                end: "bottom bottom", // Ends when .FooterAnimation3d reaches the top of the viewport
-                scrub: true, // Smooth scrolling effect
-            }
-        });
-
-        logoAnimation.to(".FooterAnimation3d", { y: 0, duration: 10 }, 0);
-
         return () => {
             ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
-            gsap.killTweensOf(".footerContainer");
+            gsap.killTweensOf(footerRef.current);
         };
     }, []);
 
