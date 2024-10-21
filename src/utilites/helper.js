@@ -42,7 +42,7 @@ export const HomePage = {
         serviceData: [
             {
                 heading: "Website Design",
-                description: "",
+                description: "We design and develop custom websites that are scalable, sustain our client's business goals for years to come and are user friendly for     billions of people worldwide.",
                 icon: `<svg width="227" height="269" viewBox="0 0 227 269" fill="none" xmlns="http://www.w3.org/2000/svg">
                             <path d="M212 167.664L192.304 133.504H152.904L212 167.664Z" fill="black"/>
                             <path d="M152.904 201.832H192.304L212 167.664L152.904 201.832Z" fill="black"/>
