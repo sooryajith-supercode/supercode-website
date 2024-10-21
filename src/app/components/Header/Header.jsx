@@ -41,7 +41,7 @@ export default function Header() {
                 <div className={styles.NavItems}>
                     <div dangerouslySetInnerHTML={{ __html: logo }} />
                     <div className={styles.NavWrapLinkBtn}>
-                        <div className={`${styles.NavWrapLink} text-5`}>
+                        <div className={`${styles.NavWrapLink} text-5 textClrBlack`}>
                             {navLinks?.map(({ label, slug }, index) => (
                                 <div key={index}>
                                     {slug ? <Link href={slug}>{label}</Link> : <div>no link slug</div>}

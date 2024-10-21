@@ -101,11 +101,28 @@
     z-index: 10;
     right: 0;
 }
+
+@media (max-width:1700px) {
+    .FooterAnimationLogo {
+        bottom: -18rem;
+    }
+    .FooterAnimation3d {
+        height: 700px;
+    }
+}
+@media (max-width:1600px) {
+    .FooterAnimationLogo {
+        bottom: -16rem;
+    }
+    .FooterAnimation3d {
+        height: 650px;
+    }
+}
 @media (max-width:1440px) {
     .FooterAnimationLogo {
         bottom: -16rem;
     }
     .FooterAnimation3d {
-        height: 498px;
+        height: 580px;
     }
 }
