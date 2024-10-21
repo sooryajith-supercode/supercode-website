@@ -102,13 +102,12 @@ export default function Home() {
                 const scrollDelta = currentScrollPos - lastScrollPos; // Calculate scroll change
 
                 // Reverse rotation direction based on scroll
-                const yRotationSpeed = scrollDelta > 0 ? 0.02 : (scrollDelta < 0 ? -0.02 : 0);
+                const yRotationSpeed = scrollDelta > 0 ? 0.05 : (scrollDelta < 0 ? -0.05 : 0);
 
                 // Use GSAP to animate the Y-axis rotation
                 gsap.to(logoRef.current.rotation, {
                     y: `+=${yRotationSpeed}`,
-                    duration: 0.05,
-                    ease: 'power1.out',
+                    duration: 0.1,
                     overwrite: 'auto', 
                 });
 
@@ -148,7 +147,7 @@ export default function Home() {
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
-                        <Canvas  >
+                        <Canvas style={{width:"100%", height:"500px" }}>
                             <ambientLight intensity={2.5} />
                             <pointLight position={[1, 1, 1]} intensity={2.5} />
                             <pointLight position={[-1, -1, -1]} intensity={2.5} />

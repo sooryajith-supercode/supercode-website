@@ -22,44 +22,66 @@ gsap.registerPlugin(ScrollTrigger);
 export default function Footer() {
     const { insight, FooterLogo, footerLinkssetOne, footerLinkssetTwo, FooterMedialinks, tellUs, copywriteText, termsPageLinks, FooterAnimationLogo } = FooterData;
     const { heading, insightData, button } = insight || {};
-
-
-    const createScrollTimeline = (triggerElement, start, end, options = {}) => {
-        return gsap.timeline({
-            scrollTrigger: {
-                trigger: triggerElement,
-                start: start,
-                end: end,
-                scrub: true,
-                ...options, // Additional ScrollTrigger options can be passed in
-            },
-        });
-    };
-
-    // State to control rotation
-    const [rotation, setRotation] = useState([0, 0, 0]);
-    const [cameraPosition, setCameraPosition] = useState([5, 0, 5]);
-    const footerRef = useRef(null);
+    const canvasRef = useRef(null); // Ref to access the canvas
+    const footerRef = useRef(null); // Ref to the footer container
+    const [cameraPosition, setCameraPosition] = useState([5, 0, 5]); // Your camera position
+    const initialFov = 0.30; // Initial FOV value
+    const originalFov = 0.11; // Original FOV value
 
     useEffect(() => {
         // Register ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
+        gsap.set(canvasRef.current, { y: -2000 });
+
         // GSAP scroll animation for the footer container
         const scrollAnimation = gsap.to(footerRef.current, {
             backgroundColor: "#072AC5", // Change this to your desired color
+            duration: 0.5,
             scrollTrigger: {
                 trigger: footerRef.current,
-                start: "top center+=300", 
-                end: "bottom bottom", 
-                scrub: true, 
-                // markers: true,
+                start: "top center+=400",
+                end: "bottom bottom",
+                scrub: true,
+                // markers: true, // Uncomment for debugging
             },
         });
 
+        // GSAP scroll animation for the canvas
+        // const canvasAnimation = gsap.to(canvasRef.current, {
+        //     y: 0, // Move to original position
+        //     duration: 2, // Animation duration
+        //     scrollTrigger: {
+        //         trigger: footerRef.current,
+        //         start: "top center",
+        //         end: "bottom bottom",
+        //         scrub: true,
+        //         markers: true,
+        //     },
+        // });
+
+        // GSAP animation for FOV change on scroll
+        // const fovAnimation = gsap.to(cameraPosition, {
+        //     fov: originalFov, // Change this to your desired original FOV
+        //     duration: 0.5,
+        //     scrollTrigger: {
+        //         trigger: footerRef.current,
+        //         start: "bottom center", 
+        //         end: "bottom bottom", 
+        //         scrub: true,
+        //         onUpdate: () => {
+        //             // Update the camera position on scroll
+        //             setCameraPosition([5, 0, 5]); // Update as needed based on FOV
+        //         },
+        //         markers: true,
+        //     },
+        // });
+
+        // Cleanup function to kill animations on unmount
         return () => {
-            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            ScrollTrigger.getAll().forEach(trigger => trigger.kill());
             gsap.killTweensOf(footerRef.current);
+            gsap.killTweensOf(canvasRef.current);
         };
     }, []);
 
@@ -167,15 +189,15 @@ export default function Footer() {
             <div className={styles?.FooterAnimationLogo}>
                 <div className="container">
 
-                    <div className={styles?.FooterAnimation3d}>
-                        <Canvas camera={{ position: cameraPosition, fov: .11 }}  >
+                    <div className={styles?.FooterAnimation3d}> {/*ref={canvasRef}*/} 
+                        <Canvas camera={{ position: cameraPosition, fov: .11  }}  >
                             <CameraController cameraPosition={[-3.50, 0.60, 1.20]} /> {/* cameraPosition */}
                             <ambientLight intensity={1.5} />
                             <directionalLight
                                 intensity={1}
 
                             />
-                            <OrbitControls autoRotate />
+                            <OrbitControls autoRotate autoRotateSpeed={1.2} />
                             {/* <axesHelper args={[3]} /> */}
                             <BlueINflateLogo
                                 rotation={[1.62, 0.05, -1.05]}
@@ -191,24 +213,6 @@ export default function Footer() {
         </div>
     );
 }
-// export function BlueINflateLogoRotation({ rotation }) {
-//     const meshRef = useRef();
-
-//     // Update the rotation of the 3D object based on props
-//     useFrame(() => {
-//         if (meshRef.current) {
-//             meshRef.current.rotation.set(rotation[0], rotation[1], rotation[2]);
-//         }
-//     });
-
-//     return (
-//         <mesh ref={meshRef}>
-//             {/* Your 3D object content (geometry, material, etc.) */}
-//             <boxGeometry args={[1, 1, 1]} />
-//             <meshStandardMaterial color="blue" />
-//         </mesh>
-//     );
-// }
 
 function CameraController({ cameraPosition }) {
     const { camera } = useThree();

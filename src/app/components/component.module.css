@@ -81,3 +81,7 @@
     gap: 14px;
     color: var(--color-10);
 }
+.InsightCardtextContentdesc{
+    max-width: 411px;
+    width: 100%;
+}

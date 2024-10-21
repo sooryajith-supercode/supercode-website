@@ -15,7 +15,7 @@ export default function InsightCard({ data }) {
                         />
                         <div className={styles?.InsightCardtextContent}>
                             <p className="text-6-med">{e.title}</p>
-                            <p className="text-5">{e.description}</p>
+                            <p className={`${styles?.InsightCardtextContentdesc} text-5`}>{e.description}</p>
                         </div>
                     </div>
                 );
