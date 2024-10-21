@@ -80,34 +80,34 @@ export default function Home() {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
     }, []);
-    const AutoRotateLogo = () => {
+
+
+    const AutoRotateLogo = ({ defaultScale }) => {
         const logoRef = useRef();
         const [rotationSpeed, setRotationSpeed] = useState(0.01); // Initial speed
-        const [scale, setScale] = useState(1.8); // Initial scale (default scaling)
+        const [scale, setScale] = useState(2.1); // Initial scale 
 
         // Update the logo's rotation and scale in the animation frame
         useFrame(() => {
             if (logoRef.current) {
-                logoRef.current.rotation.x += rotationSpeed; // Rotate around X-axis
-                logoRef.current.rotation.y += rotationSpeed; // Rotate around Y-axis
-                logoRef.current.scale.set(scale, scale, scale); // Set the scale
+                logoRef.current.rotation.x += rotationSpeed; 
+                logoRef.current.rotation.y += rotationSpeed; 
+                logoRef.current.scale.set(scale, scale, scale); 
             }
         });
 
-        // Scroll event listener
         const handleScroll = () => {
             // When scrolling, set speed to 3 and scale to 1.5
             setRotationSpeed(0.02);
-            setScale(1.8);
+            setScale(2.1);
         };
 
         const handleStopScroll = () => {
-            // When not scrolling, set speed to 2 and scale back to 1 gradually
+            // When not scrolling, 
             setRotationSpeed(0.01);
 
-            // Use a timeout to gradually reduce scale back to 1
             setTimeout(() => {
-                setScale(1.8); // Reset scale to default
+                setScale(2.1); // Reset scale to default
             }, 500); // Adjust this duration for smoothness
         };
 
@@ -132,8 +132,8 @@ export default function Home() {
         }, []);
 
         return (
-            <mesh ref={logoRef}>
-                <WhiteInflateLogo />
+            <mesh ref={logoRef} >
+                <WhiteInflateLogo  />
             </mesh>
         ); 
     };
@@ -158,13 +158,13 @@ export default function Home() {
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
-                        <Canvas camera={{ fov: 4 }}>
-                            <ambientLight intensity={1.2} />
-                            <pointLight position={[1, 1, 1]} intensity={1.5} />
-                            <pointLight position={[-1, -1, -1]} intensity={1.5} />
+                        <Canvas  >
+                            <ambientLight intensity={2.5} />
+                            <pointLight position={[1, 1, 1]} intensity={2.5} />
+                            <pointLight position={[-1, -1, -1]} intensity={2.5} />
                             <directionalLight position={[0, 1, 2]} intensity={2} castShadow={true} />
-                            <AutoRotateLogo scale = {[1.5,1.5,1.5]}/>
-                            <PerspectiveCamera makeDefault position={[0, 0, .3]} />
+                            <AutoRotateLogo />
+                            <PerspectiveCamera makeDefault position={[0, 0, .35]}  />
                         </Canvas>
                     </div>
                     <div className={styles?.AnimationLogoWrapcontent}>
@@ -178,14 +178,3 @@ export default function Home() {
         </div>
     );
 }
-
-
-// function CameraController({ cameraPosition }) {
-//     const { camera } = useThree();
-
-//     useEffect(() => {
-//         camera.position.set(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
-//     }, [cameraPosition, camera]);
-
-//     return null;
-// }

@@ -15,29 +15,64 @@ import { BlueINflateLogo } from '../AnimationLOgo/BlueInflateLogo';
 gsap.registerPlugin(ScrollTrigger);
 
 
-const createScrollTimeline = (triggerElement, start, end, options = {}) => {
-    return gsap.timeline({
-        scrollTrigger: {
-            trigger: triggerElement,
-            start: start,
-            end: end,
-            scrub: true,
-            ...options, // Additional ScrollTrigger options can be passed in
-        },
-    });
-};
+
+
+
 
 export default function Footer() {
     const { insight, FooterLogo, footerLinkssetOne, footerLinkssetTwo, FooterMedialinks, tellUs, copywriteText, termsPageLinks, FooterAnimationLogo } = FooterData;
     const { heading, insightData, button } = insight || {};
 
+
+    const createScrollTimeline = (triggerElement, start, end, options = {}) => {
+        return gsap.timeline({
+            scrollTrigger: {
+                trigger: triggerElement,
+                start: start,
+                end: end,
+                scrub: true,
+                ...options, // Additional ScrollTrigger options can be passed in
+            },
+        });
+    };
+
     // State to control rotation
     const [rotation, setRotation] = useState([0, 0, 0]);
     const [cameraPosition, setCameraPosition] = useState([5, 0, 5]);
+    const footerRef = useRef(null);
+    useEffect(() => {
+        // GSAP scroll animation for the footer container
+        const scrollAnimation = gsap.to(footerRef.current, {
+            scrollTrigger: {
+                trigger: footerRef.current, // The element to trigger the animation
+                start: "top top", // Start animation when .footerContainer reaches the top
+                end: "bottom bottom", // End when 100% more of .footerContainer is scrolled through
+                scrub: true, // Smooth animation based on scroll
+                markers: true,
+            },
+        });
+
+        // GSAP animation for 3D logo when footerContainer is scrolled
+        const logoAnimation = gsap.timeline({
+            scrollTrigger: {
+                trigger: ".FooterAnimation3d",
+                start: "top top", // Starts when .FooterAnimation3d hits the bottom of the viewport
+                end: "bottom bottom", // Ends when .FooterAnimation3d reaches the top of the viewport
+                scrub: true, // Smooth scrolling effect
+            }
+        });
+
+        logoAnimation.to(".FooterAnimation3d", { y: 0, duration: 10 }, 0);
+
+        return () => {
+            ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+            gsap.killTweensOf(".footerContainer");
+        };
+    }, []);
 
 
     return (
-        <div className={`${styles?.footerContainer}`}>
+        <div className={`${styles?.footerContainer}`} ref={footerRef}>
             <div className={`${styles?.footerContentContainer}`}>
                 <div>
                     <div className='container'>
@@ -151,7 +186,6 @@ export default function Footer() {
                             {/* <axesHelper args={[3]} /> */}
                             <BlueINflateLogo
                                 rotation={[1.62, 0.05, -1.05]}
-                                //rotation
                                 position={[0, 0, 0]}
                                 scale={[0.1, 0.1, 0.1]}
 
@@ -164,24 +198,24 @@ export default function Footer() {
         </div>
     );
 }
-export function BlueINflateLogoRotation({ rotation }) {
-    const meshRef = useRef();
+// export function BlueINflateLogoRotation({ rotation }) {
+//     const meshRef = useRef();
 
-    // Update the rotation of the 3D object based on props
-    useFrame(() => {
-        if (meshRef.current) {
-            meshRef.current.rotation.set(rotation[0], rotation[1], rotation[2]);
-        }
-    });
+//     // Update the rotation of the 3D object based on props
+//     useFrame(() => {
+//         if (meshRef.current) {
+//             meshRef.current.rotation.set(rotation[0], rotation[1], rotation[2]);
+//         }
+//     });
 
-    return (
-        <mesh ref={meshRef}>
-            {/* Your 3D object content (geometry, material, etc.) */}
-            <boxGeometry args={[1, 1, 1]} />
-            <meshStandardMaterial color="blue" />
-        </mesh>
-    );
-}
+//     return (
+//         <mesh ref={meshRef}>
+//             {/* Your 3D object content (geometry, material, etc.) */}
+//             <boxGeometry args={[1, 1, 1]} />
+//             <meshStandardMaterial color="blue" />
+//         </mesh>
+//     );
+// }
 
 function CameraController({ cameraPosition }) {
     const { camera } = useThree();
