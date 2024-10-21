@@ -7,7 +7,7 @@ export default function InsightCard({ data }) {
         <>
             {data?.map((e, index) => {
                 return (
-                    <div className={styles?.InsightCard}>
+                    <div className={styles?.InsightCard} key={index}>
                         <Image
                             src={e.image}
                             width={411}

@@ -1,8 +1,8 @@
 "use client"
-import React, { Suspense, useEffect, useRef, useState } from 'react';
+import React, { Suspense, useEffect, useMemo, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Canvas, useFrame } from '@react-three/fiber';
+import { Canvas, useFrame, useThree } from '@react-three/fiber';
 import { OrbitControls, useGLTF, PerspectiveCamera } from '@react-three/drei';
 import * as styles from "./homepage.module.css";
 import BannerSection from './components/BannerSection';
@@ -87,11 +87,11 @@ export default function Home() {
         const center = box.getCenter(new THREE.Vector3());
 
         // Scale the model up to make it visible
-        scene.scale.set(2, 2, 2);
+        scene.scale.set(1.5, 1.5, 1.5);
         scene.position.set(-center.x, -center.y, 0);
 
         // Store the current rotation speed
-        const rotationSpeedRef = useRef(0.005); 
+        const rotationSpeedRef = useRef(0.005);
         const speedBoostTimeout = useRef(null);
 
         useFrame(() => {
@@ -99,8 +99,8 @@ export default function Home() {
             gsap.to(scene.rotation, {
                 x: scene.rotation.x + rotationSpeedRef.current,
                 y: scene.rotation.y + rotationSpeedRef.current,
-                duration: 0.1, 
-                ease: "power1.inOut", 
+                duration: 0.1,
+                ease: "power1.inOut",
             });
         });
 
@@ -117,10 +117,10 @@ export default function Home() {
                     // Gradually reduce speed using GSAP
                     gsap.to(rotationSpeedRef, {
                         current: 0.02, // Adjust non-scroll speed
-                        duration: 1, 
+                        duration: 1,
                         ease: "power1.inOut",
                         onUpdate: () => {
-                            rotationSpeedRef.current = rotationSpeedRef.current; 
+                            rotationSpeedRef.current = rotationSpeedRef.current;
                         }
                     });
                 }, 10); // Delay before starting decay to allow some scroll time
@@ -135,13 +135,13 @@ export default function Home() {
         return <primitive object={scene} />;
     };
 
-
+const bannerSection = useMemo(()=>  <BannerSection banner={banner} />,[banner])
 
     return (
         <div>
             <div className={`${styles.sectionMainWrap}`}>
                 <div className={`${styles.sectionBanner}`}>
-                    <BannerSection banner={banner} />
+                   {bannerSection}
                 </div>
                 <Visionary visionary={visionary} />
                 <div className='container'>
@@ -154,7 +154,8 @@ export default function Home() {
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
-                        <Canvas >
+                        <Canvas camera={{ fov: .2 }}>
+                            {/* <CameraController cameraPosition={[.2, .2, .2]}  /> */}
                             <ambientLight intensity={0.9} />
                             <pointLight
                                 position={[1, 1, 1]}
@@ -165,10 +166,12 @@ export default function Home() {
                                 intensity={0.8}
                             />
                             <Suspense fallback={null}>
-                                <WhiteLogoModel />
+                                <WhiteLogoModel
+                                    scale={[2, 2, 2]}
+                                />
                             </Suspense>
                             <OrbitControls />
-                            <PerspectiveCamera makeDefault  position={[0, 0, 0.3]} far={10000}/>
+                            <PerspectiveCamera makeDefault position={[0, 0, 0.3]} far={10000} />
                         </Canvas>
                     </div>
                     <div className={styles?.AnimationLogoWrapcontent}>
@@ -182,3 +185,14 @@ export default function Home() {
         </div>
     );
 }
+
+
+// function CameraController({ cameraPosition }) {
+//     const { camera } = useThree();
+
+//     useEffect(() => {
+//         camera.position.set(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
+//     }, [cameraPosition, camera]);
+
+//     return null;
+// }

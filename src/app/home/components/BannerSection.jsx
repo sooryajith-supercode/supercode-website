@@ -1,7 +1,8 @@
+'use client;'
 import React from 'react';
 import * as styles from "../css/bannersection.module.css";
 
-const BannerSection = React.memo(({ banner }) => {
+const BannerSection =({ banner }) => {
     const { MainHeading, AnimationLogo, bannerDescription } = banner || {};
 
     return (
@@ -17,6 +18,6 @@ const BannerSection = React.memo(({ banner }) => {
             </div>
         </div>
     );
-});
+};
 
 export default BannerSection;
