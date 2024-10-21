@@ -13,6 +13,7 @@ import Results from './components/Results';
 import SuperHits from './components/SuperHits';
 import Clients from './components/Clients';
 import * as THREE from 'three';
+import { WhiteInflateLogo } from '../components/AnimationLOgo/WhiteInflateLogo';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -79,69 +80,72 @@ export default function Home() {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
     }, []);
+    const AutoRotateLogo = () => {
+        const logoRef = useRef();
+        const [rotationSpeed, setRotationSpeed] = useState(0.01); // Initial speed
+        const [scale, setScale] = useState(1.8); // Initial scale (default scaling)
 
-    // Component to render GLB model
-    const WhiteLogoModel = () => {
-        const { scene } = useGLTF('/assets/WhiteInflateLogo.gltf');
-        const box = new THREE.Box3().setFromObject(scene);
-        const center = box.getCenter(new THREE.Vector3());
-
-        // Scale the model up to make it visible
-        scene.scale.set(1.5, 1.5, 1.5);
-        scene.position.set(-center.x, -center.y, 0);
-
-        // Store the current rotation speed
-        const rotationSpeedRef = useRef(0.005);
-        const speedBoostTimeout = useRef(null);
-
+        // Update the logo's rotation and scale in the animation frame
         useFrame(() => {
-            // Apply rotation using GSAP's to function
-            gsap.to(scene.rotation, {
-                x: scene.rotation.x + rotationSpeedRef.current,
-                y: scene.rotation.y + rotationSpeedRef.current,
-                duration: 0.1,
-                ease: "power1.inOut",
-            });
+            if (logoRef.current) {
+                logoRef.current.rotation.x += rotationSpeed; // Rotate around X-axis
+                logoRef.current.rotation.y += rotationSpeed; // Rotate around Y-axis
+                logoRef.current.scale.set(scale, scale, scale); // Set the scale
+            }
         });
 
-        // Handle scroll event to set rotation based on scroll position
+        // Scroll event listener
+        const handleScroll = () => {
+            // When scrolling, set speed to 3 and scale to 1.5
+            setRotationSpeed(0.02);
+            setScale(1.8);
+        };
+
+        const handleStopScroll = () => {
+            // When not scrolling, set speed to 2 and scale back to 1 gradually
+            setRotationSpeed(0.01);
+
+            // Use a timeout to gradually reduce scale back to 1
+            setTimeout(() => {
+                setScale(1.8); // Reset scale to default
+            }, 500); // Adjust this duration for smoothness
+        };
+
         useEffect(() => {
-            const handleScroll = () => {
-                const speedBoost = 0.1; // Increased speed during scroll 
-                rotationSpeedRef.current = speedBoost;
+            let isScrolling;
 
-                // Reset speed after scrolling stops
-                if (speedBoostTimeout.current) clearTimeout(speedBoostTimeout.current);
+            window.addEventListener('scroll', () => {
+                handleScroll();
 
-                speedBoostTimeout.current = setTimeout(() => {
-                    // Gradually reduce speed using GSAP
-                    gsap.to(rotationSpeedRef, {
-                        current: 0.02, // Adjust non-scroll speed
-                        duration: 1,
-                        ease: "power1.inOut",
-                        onUpdate: () => {
-                            rotationSpeedRef.current = rotationSpeedRef.current;
-                        }
-                    });
-                }, 10); // Delay before starting decay to allow some scroll time
-            };
+                // Clear previous timeout
+                clearTimeout(isScrolling);
 
-            window.addEventListener('scroll', handleScroll);
+                // Set a timeout to run when scrolling ends
+                isScrolling = setTimeout(() => {
+                    handleStopScroll();
+                }, 200);
+            });
+
             return () => {
                 window.removeEventListener('scroll', handleScroll);
-                if (speedBoostTimeout.current) clearTimeout(speedBoostTimeout.current);
             };
         }, []);
-        return <primitive object={scene} />;
+
+        return (
+            <mesh ref={logoRef}>
+                <WhiteInflateLogo />
+            </mesh>
+        ); 
     };
 
-const bannerSection = useMemo(()=>  <BannerSection banner={banner} />,[banner])
+
+    const bannerSection = useMemo(() => <BannerSection banner={banner} />, [banner])
 
     return (
         <div>
             <div className={`${styles.sectionMainWrap}`}>
                 <div className={`${styles.sectionBanner}`}>
-                   {bannerSection}
+                    {bannerSection}
                 </div>
                 <Visionary visionary={visionary} />
                 <div className='container'>
@@ -154,24 +158,13 @@ const bannerSection = useMemo(()=>  <BannerSection banner={banner} />,[banner])
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
-                        <Canvas camera={{ fov: .2 }}>
-                            {/* <CameraController cameraPosition={[.2, .2, .2]}  /> */}
-                            <ambientLight intensity={0.9} />
-                            <pointLight
-                                position={[1, 1, 1]}
-                                intensity={0.8}
-                            />
-                            <pointLight
-                                position={[-1, -1, -1]}
-                                intensity={0.8}
-                            />
-                            <Suspense fallback={null}>
-                                <WhiteLogoModel
-                                    scale={[2, 2, 2]}
-                                />
-                            </Suspense>
-                            <OrbitControls />
-                            <PerspectiveCamera makeDefault position={[0, 0, 0.3]} far={10000} />
+                        <Canvas camera={{ fov: 4 }}>
+                            <ambientLight intensity={1.2} />
+                            <pointLight position={[1, 1, 1]} intensity={1.5} />
+                            <pointLight position={[-1, -1, -1]} intensity={1.5} />
+                            <directionalLight position={[0, 1, 2]} intensity={2} castShadow={true} />
+                            <AutoRotateLogo scale = {[1.5,1.5,1.5]}/>
+                            <PerspectiveCamera makeDefault position={[0, 0, .3]} />
                         </Canvas>
                     </div>
                     <div className={styles?.AnimationLogoWrapcontent}>
