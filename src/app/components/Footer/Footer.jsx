@@ -48,7 +48,6 @@ export default function Footer() {
                 start: "top top", // Start animation when .footerContainer reaches the top
                 end: "bottom bottom", // End when 100% more of .footerContainer is scrolled through
                 scrub: true, // Smooth animation based on scroll
-                markers: true,
             },
         });
 
