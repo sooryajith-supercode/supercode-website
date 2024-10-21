@@ -1,15 +1,32 @@
-import React, { useRef, useState,useEffect } from 'react';
+import React, { useRef, useState, useEffect } from 'react';
 import * as styles from "./footer.module.css";
 import { FooterData } from '@/utilites/helper';
 import InsightCard from '../cards/InsightCard';
 import PrimaryButton from '../button/PrimaryButton';
 import Link from 'next/link';
-import { Canvas, useLoader, useFrame,useThree } from '@react-three/fiber';
+import { Canvas, useLoader, useFrame, useThree } from '@react-three/fiber';
 import { TextureLoader } from 'three';
+import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
 import { gsap } from 'gsap';
 import { useGLTF, OrbitControls, Environment } from '@react-three/drei';
 import Image from 'next/image';
 import { BlueINflateLogo } from '../AnimationLOgo/BlueInflateLogo';
+
+gsap.registerPlugin(ScrollTrigger);
+
+
+const createScrollTimeline = (triggerElement, start, end, options = {}) => {
+    return gsap.timeline({
+        scrollTrigger: {
+            trigger: triggerElement,
+            start: start,
+            end: end,
+            scrub: true,
+            ...options, // Additional ScrollTrigger options can be passed in
+        },
+    });
+};
+
 export default function Footer() {
     const { insight, FooterLogo, footerLinkssetOne, footerLinkssetTwo, FooterMedialinks, tellUs, copywriteText, termsPageLinks, FooterAnimationLogo } = FooterData;
     const { heading, insightData, button } = insight || {};
@@ -17,6 +34,7 @@ export default function Footer() {
     // State to control rotation
     const [rotation, setRotation] = useState([0, 0, 0]);
     const [cameraPosition, setCameraPosition] = useState([5, 0, 5]);
+
 
     return (
         <div className={`${styles?.footerContainer}`}>
@@ -123,16 +141,16 @@ export default function Footer() {
 
                     <div className={styles?.FooterAnimation3d}>
                         <Canvas camera={{ position: cameraPosition, fov: .11 }}  >
-                            <CameraController cameraPosition={[-3.50,0.60,1.20]} /> {/* cameraPosition */}
+                            <CameraController cameraPosition={[-3.50, 0.60, 1.20]} /> {/* cameraPosition */}
                             <ambientLight intensity={1.5} />
                             <directionalLight
                                 intensity={1}
 
                             />
-                            <OrbitControls autoRotate/>
+                            <OrbitControls autoRotate />
                             {/* <axesHelper args={[3]} /> */}
                             <BlueINflateLogo
-                                rotation={[1.62,0.05,-1.05]}  
+                                rotation={[1.62, 0.05, -1.05]}
                                 //rotation
                                 position={[0, 0, 0]}
                                 scale={[0.1, 0.1, 0.1]}

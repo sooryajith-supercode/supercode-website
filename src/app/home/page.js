@@ -1,3 +1,4 @@
+"use client"
 import React, { Suspense, useEffect, useRef, useState } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
@@ -6,7 +7,7 @@ import { OrbitControls, useGLTF, PerspectiveCamera } from '@react-three/drei';
 import * as styles from "./homepage.module.css";
 import BannerSection from './components/BannerSection';
 import { HomePage } from '@/utilites/helper';
-import Visionary from './components/visionary';
+import Visionary from './components/Visionary';
 import WhatWeDo from './components/WhatWeDo';
 import Results from './components/Results';
 import SuperHits from './components/SuperHits';
