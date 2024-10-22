@@ -101,12 +101,12 @@ export default function Home() {
 
             const handleScroll = () => {
                 const currentScrollPos = window.scrollY;
-                const scrollDelta = currentScrollPos - lastScrollPos; // Calculate scroll change
+                const scrollDelta = currentScrollPos - lastScrollPos;
 
                 // Reverse rotation direction based on scroll
                 const yRotationSpeed = scrollDelta > 0 ? 0.06 : (scrollDelta < 0 ? -0.06 : 0);
 
-                // Use GSAP to animate the Y-axis rotation
+                
                 gsap.to(logoRef.current.rotation, {
                     y: `+=${yRotationSpeed}`,
                     duration: 0.1,
@@ -118,15 +118,13 @@ export default function Home() {
                     clearTimeout(scrollTimeout);
                 }
 
-                // Set a new timeout to detect when scrolling has stopped
                 scrollTimeout = setTimeout(() => {
                     // Stop the Y-axis rotation immediately when scrolling stops
                     gsap.to(logoRef.current.rotation, {
                         y: `+=0`, // No additional rotation
                         duration: 0.1,
                     });
-                },0); // Short delay to detect scroll stop
-
+                }, 200);
                 lastScrollPos = currentScrollPos;
             };
 

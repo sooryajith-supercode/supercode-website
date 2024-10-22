@@ -24,25 +24,26 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                 { y: 0 },
                 {
                     y: -180,
-                    duration: 1,
+                    duration: 2,
                     ease: "power1.inOut",
                     scrollTrigger: {
                         trigger: secondCard,
-                        start: "top-=200 center",
+                        start: "top+=100 center",
                         end: "top+=100 center",
                         scrub: 1,
                         onEnter: () => {
                             gsap.to(firstCardIcon, {
                                 opacity: 0,
-                                duration: 0,
+                                duration:1,
                             });
                         },
                         onLeaveBack: () => {
                             gsap.to(firstCardIcon, {
                                 opacity: 1,
-                                duration: 0,
+                                duration:1,
                             });
-                        }
+                        },
+                        // markers:true,
                     },
                 }
             );
@@ -74,8 +75,7 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                                 <div
                                     className={styles?.ServiceCardIcon}
                                     dangerouslySetInnerHTML={{ __html: e.icon }}
-                                    ref={index === 0 ? firstCardIconRef : null}
-                                    style={{ transition: "opacity 0.5s ease" }} 
+                                    ref={index === 0 ? firstCardIconRef : null} 
                                 />
                             </div>
                         </div>
