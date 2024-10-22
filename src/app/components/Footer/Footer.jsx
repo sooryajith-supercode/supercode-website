@@ -24,9 +24,17 @@ export default function Footer() {
     const { heading, insightData, button } = insight || {};
     const canvasRef = useRef(null); // Ref to access the canvas
     const footerRef = useRef(null); // Ref to the footer container
-    const [cameraPosition, setCameraPosition] = useState([5, 0, 5]); // Your camera position
-    const initialFov = 0.30; // Initial FOV value
-    const originalFov = 0.11; // Original FOV value
+    const [cameraPosition, setCameraPosition] = useState([-3.50, 4.80, 1.20]); // Your camera position
+    const [fovValue, setFovValue] = useState(0.28);
+    const orbitControlsRef = useRef(null);
+    let scrollTimeout;
+
+    // Update camera position based on slider value
+    // const handleCameraChange = (axis, value) => {
+    //     const newPosition = [...cameraPosition];
+    //     newPosition[axis] = value;
+    //     setCameraPosition(newPosition);
+    // };
 
     useEffect(() => {
         // Register ScrollTrigger
@@ -34,54 +42,69 @@ export default function Footer() {
 
         gsap.set(canvasRef.current, { y: -2000 });
 
+        gsap.set(cameraPosition, { fov: fovValue });
+
         // GSAP scroll animation for the footer container
         const scrollAnimation = gsap.to(footerRef.current, {
-            backgroundColor: "#072AC5", // Change this to your desired color
+            backgroundColor: "#072AC5",
             duration: 0.5,
             scrollTrigger: {
                 trigger: footerRef.current,
                 start: "top center+=400",
                 end: "bottom bottom",
                 scrub: true,
-                // markers: true, // Uncomment for debugging
+                // markers: true,
             },
         });
 
         // GSAP scroll animation for the canvas
-        // const canvasAnimation = gsap.to(canvasRef.current, {
-        //     y: 0, // Move to original position
-        //     duration: 2, // Animation duration
-        //     scrollTrigger: {
-        //         trigger: footerRef.current,
-        //         start: "top center",
-        //         end: "bottom bottom",
-        //         scrub: true,
-        //         markers: true,
-        //     },
-        // });
+        const canvasAnimation = gsap.to(canvasRef.current, {
+            y: 0,
+            duration: 2,
+            scrollTrigger: {
+                trigger: footerRef.current,
+                start: "top center",
+                end: "bottom bottom",
+                scrub: true,
+                // markers: true,
+                onUpdate: (self) => {
+                    // Map scroll progress to fov and camera y position
+                    const newFov = gsap.utils.mapRange(0, 1, 0.28, 0.11, self.progress);
+                    const newYPosition = gsap.utils.mapRange(0, 1, 4.80, 0.60, self.progress);
+                    setFovValue(newFov);
+                    setCameraPosition([-3.50, newYPosition, 1.20]);
+                },
+            },
+        });
+        // Manage scroll event to toggle autoRotate
+        const handleScrollStart = () => {
+            orbitControlsRef.current.autoRotate = false; // Disable auto-rotate on scroll
+            gsap.to(orbitControlsRef.current, { autoRotate: false });
+            clearTimeout(scrollTimeout);
+        };
 
-        // GSAP animation for FOV change on scroll
-        // const fovAnimation = gsap.to(cameraPosition, {
-        //     fov: originalFov, // Change this to your desired original FOV
-        //     duration: 0.5,
-        //     scrollTrigger: {
-        //         trigger: footerRef.current,
-        //         start: "bottom center", 
-        //         end: "bottom bottom", 
-        //         scrub: true,
-        //         onUpdate: () => {
-        //             // Update the camera position on scroll
-        //             setCameraPosition([5, 0, 5]); // Update as needed based on FOV
-        //         },
-        //         markers: true,
-        //     },
-        // });
+        const handleScrollEnd = () => {
+            scrollTimeout = setTimeout(() => {
+                orbitControlsRef.current.autoRotate = true; // Enable auto-rotate after scrolling stops
+                gsap.to(orbitControlsRef.current, { autoRotate: true });
+            }, 200); // Adjust timeout duration as needed
+        };
 
-        // Cleanup function to kill animations on unmount
+        // Event listeners for scroll events
+        window.addEventListener('scroll', handleScrollStart);
+        window.addEventListener('scroll', handleScrollEnd);
+
+        // Cleanup on unmount
         return () => {
+            // Kill all GSAP triggers
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+            // Kill GSAP tweens for specific elements
             gsap.killTweensOf(footerRef.current);
             gsap.killTweensOf(canvasRef.current);
+            // Remove event listeners
+            window.removeEventListener('scroll', handleScrollStart);
+            window.removeEventListener('scroll', handleScrollEnd);
+            clearTimeout(scrollTimeout);
         };
     }, []);
 
@@ -188,17 +211,16 @@ export default function Footer() {
             </div>
             <div className={styles?.FooterAnimationLogo}>
                 <div className="container">
-
-                    <div className={styles?.FooterAnimation3d}> {/*ref={canvasRef}*/} 
-                        <Canvas camera={{ position: cameraPosition, fov: .11  }}  >
-                            <CameraController cameraPosition={[-3.50, 0.60, 1.20]} /> {/* cameraPosition */}
+                    <div className={styles?.FooterAnimation3d} ref={canvasRef}>
+                        <Canvas camera={{ position: cameraPosition, }}  >
+                            <CameraController cameraPosition={cameraPosition} fovValue={fovValue} /> {/* [-3.50, 0.60, 1.20]*/}
                             <ambientLight intensity={1.5} />
                             <directionalLight
                                 intensity={1}
 
                             />
-                            <OrbitControls autoRotate autoRotateSpeed={1.2} />
-                            {/* <axesHelper args={[3]} /> */}
+                            <OrbitControls ref={orbitControlsRef} autoRotateSpeed={0.8} />
+
                             <BlueINflateLogo
                                 rotation={[1.62, 0.05, -1.05]}
                                 position={[0, 0, 0]}
@@ -208,18 +230,57 @@ export default function Footer() {
                         </Canvas>
 
                     </div>
+
+
+                    {/* <div className={styles?.cameraControl}>
+                        <div>
+                            <label>X Camera Position: {cameraPosition[0].toFixed(2)}</label>
+                            <input
+                                type="range"
+                                min={-10}
+                                max={10}
+                                step={0.1}
+                                value={cameraPosition[0]}
+                                onChange={(e) => handleCameraChange(0, parseFloat(e.target.value))}
+                            />
+                        </div>
+                        <div>
+                            <label>Y Camera Position: {cameraPosition[1].toFixed(2)}</label>
+                            <input
+                                type="range"
+                                min={-10}
+                                max={10}
+                                step={0.1}
+                                value={cameraPosition[1]}
+                                onChange={(e) => handleCameraChange(1, parseFloat(e.target.value))}
+                            />
+                        </div>
+                        <div>
+                            <label>Z Camera Position: {cameraPosition[2].toFixed(2)}</label>
+                            <input
+                                type="range"
+                                min={-10}
+                                max={10}
+                                step={0.1}
+                                value={cameraPosition[2]}
+                                onChange={(e) => handleCameraChange(2, parseFloat(e.target.value))}
+                            />
+                        </div>
+                    </div> */}
                 </div>
             </div>
         </div>
     );
 }
 
-function CameraController({ cameraPosition }) {
+function CameraController({ cameraPosition, fovValue }) {
     const { camera } = useThree();
 
     useEffect(() => {
         camera.position.set(cameraPosition[0], cameraPosition[1], cameraPosition[2]);
-    }, [cameraPosition, camera]);
+        camera.fov = fovValue;
+        camera.updateProjectionMatrix();
+    }, [cameraPosition, camera, fovValue]);
 
     return null;
 }
