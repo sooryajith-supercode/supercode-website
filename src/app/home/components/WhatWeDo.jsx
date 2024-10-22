@@ -25,7 +25,7 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                 {
                     y: -180,
                     duration: 2,
-                    ease: "power1.inOut",
+                    ease: "power2.inOut",
                     scrollTrigger: {
                         trigger: secondCard,
                         start: "top+=100 center",
@@ -64,8 +64,9 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                         <div
                             className={styles?.ServiceCard}
                             key={index}
-                            style={{ backgroundColor: cardColor }}
+                            style={{ backgroundColor: cardColor,transition:"ease 0.2s" }}
                             ref={index === 1 ? cardRef : null}
+
                         >
                             <div className={`${styles?.ServiceCardText} container`}>
                                 <div className={`${styles?.ServiceCardTextContent}`}>
