@@ -40,7 +40,7 @@ export default function Footer() {
         // Register ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.set(canvasRef.current, { y: -2000 });
+        gsap.set(canvasRef.current, { y: -1600 });
 
         gsap.set(cameraPosition, { fov: fovValue });
 
@@ -60,13 +60,12 @@ export default function Footer() {
         // GSAP scroll animation for the canvas
         const canvasAnimation = gsap.to(canvasRef.current, {
             y: 0,
-            duration: 2,
             scrollTrigger: {
                 trigger: footerRef.current,
                 start: "top center",
                 end: "bottom bottom",
-                scrub: true,
-                // markers: true,
+                scrub: 1,
+                markers: true,
                 onUpdate: (self) => {
                     // Map scroll progress to fov and camera y position
                     const newFov = gsap.utils.mapRange(0, 1, 0.28, 0.11, self.progress);
