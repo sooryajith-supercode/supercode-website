@@ -82,10 +82,13 @@ export default function Home() {
 
     const AutoRotateLogo = () => {
         const logoRef = useRef();
-        const rotationSpeedX = 0.003; // speed for X-axis rotation
+        const rotationSpeedX = 0.002; // speed for X-axis rotation
 
         // Set initial scale
         const initialScale = 8;
+
+        let scrollTimeout; // Timeout for detecting scroll stop
+
         useFrame(() => {
             if (logoRef.current) {
                 // Continuous rotation around the X-axis
@@ -110,14 +113,30 @@ export default function Home() {
                     overwrite: 'auto',
                 });
 
-                lastScrollPos = currentScrollPos;
+                // Clear the previous timeout
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
 
+                // Set a new timeout to detect when scrolling has stopped
+                scrollTimeout = setTimeout(() => {
+                    // Stop the Y-axis rotation immediately when scrolling stops
+                    gsap.to(logoRef.current.rotation, {
+                        y: `+=0`, // No additional rotation
+                        duration: 0.1,
+                    });
+                },0); // Short delay to detect scroll stop
+
+                lastScrollPos = currentScrollPos;
             };
 
             // Add scroll event listener
             window.addEventListener('scroll', handleScroll);
             return () => {
                 window.removeEventListener('scroll', handleScroll);
+                if (scrollTimeout) {
+                    clearTimeout(scrollTimeout);
+                }
             };
         }, []);
 

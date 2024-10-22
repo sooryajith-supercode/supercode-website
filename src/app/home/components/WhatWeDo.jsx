@@ -53,7 +53,7 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
         <div>
             <div className={`${styles?.whatwedoHeading}`}>
                 <div className="container">
-                    <h2 className="text-4-med textClrBlack">{heading}</h2>
+                    <h2 className="text-4-med ">{heading}</h2>
                 </div>
             </div>
             <div className={styles?.ServiceCardWrap} ref={cardwrapRef}>
