@@ -71,7 +71,6 @@ export default function Home() {
                 start: 'top top',
                 end: () => `+=${animationLogoWrap.offsetHeight}`,
                 pin: true,
-                scrub: true,
             },
         });
 
@@ -83,10 +82,10 @@ export default function Home() {
 
     const AutoRotateLogo = () => {
         const logoRef = useRef();
-        const rotationSpeedX = 0.005; // speed for X-axis rotation
+        const rotationSpeedX = 0.003; // speed for X-axis rotation
 
         // Set initial scale
-        const initialScale = 8; 
+        const initialScale = 8;
         useFrame(() => {
             if (logoRef.current) {
                 // Continuous rotation around the X-axis
@@ -102,16 +101,17 @@ export default function Home() {
                 const scrollDelta = currentScrollPos - lastScrollPos; // Calculate scroll change
 
                 // Reverse rotation direction based on scroll
-                const yRotationSpeed = scrollDelta > 0 ? 0.05 : (scrollDelta < 0 ? -0.05 : 0);
+                const yRotationSpeed = scrollDelta > 0 ? 0.06 : (scrollDelta < 0 ? -0.06 : 0);
 
                 // Use GSAP to animate the Y-axis rotation
                 gsap.to(logoRef.current.rotation, {
                     y: `+=${yRotationSpeed}`,
                     duration: 0.1,
-                    overwrite: 'auto', 
+                    overwrite: 'auto',
                 });
 
-                lastScrollPos = currentScrollPos; 
+                lastScrollPos = currentScrollPos;
+
             };
 
             // Add scroll event listener
@@ -147,10 +147,10 @@ export default function Home() {
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
-                        <Canvas style={{width:"100%", height:"500px" }}>
-                            <ambientLight intensity={2.5} />
-                            <pointLight position={[1, 1, 1]} intensity={2.5} />
-                            <pointLight position={[-1, -1, -1]} intensity={2.5} />
+                        <Canvas style={{ width: "100%", height: "500px" }}>
+                            <ambientLight intensity={4.5} />
+                            <pointLight position={[1, 1, 1]} intensity={3} />
+                            <pointLight position={[-1, -1, -1]} intensity={.5} />
                             <directionalLight position={[0, 1, 2]} intensity={2} castShadow={true} />
                             <AutoRotateLogo />
                             <PerspectiveCamera makeDefault position={[0, 0, 2]} fov={32} near={0.1} far={500} />

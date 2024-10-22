@@ -14,11 +14,6 @@ import { BlueINflateLogo } from '../AnimationLOgo/BlueInflateLogo';
 
 gsap.registerPlugin(ScrollTrigger);
 
-
-
-
-
-
 export default function Footer() {
     const { insight, FooterLogo, footerLinkssetOne, footerLinkssetTwo, FooterMedialinks, tellUs, copywriteText, termsPageLinks, FooterAnimationLogo } = FooterData;
     const { heading, insightData, button } = insight || {};
@@ -40,7 +35,7 @@ export default function Footer() {
         // Register ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
 
-        gsap.set(canvasRef.current, { y: -1600 });
+        gsap.set(canvasRef.current, { y: -1500 });
 
         gsap.set(cameraPosition, { fov: fovValue });
 
@@ -64,11 +59,11 @@ export default function Footer() {
                 trigger: footerRef.current,
                 start: "top center",
                 end: "bottom bottom",
-                scrub: 1,
-                markers: true,
+                scrub: 2,
+                // markers: true,
                 onUpdate: (self) => {
                     // Map scroll progress to fov and camera y position
-                    const newFov = gsap.utils.mapRange(0, 1, 0.28, 0.11, self.progress);
+                    const newFov = gsap.utils.mapRange(0, 1, 0.25, 0.11, self.progress);
                     const newYPosition = gsap.utils.mapRange(0, 1, 4.80, 0.60, self.progress);
                     setFovValue(newFov);
                     setCameraPosition([-3.50, newYPosition, 1.20]);
