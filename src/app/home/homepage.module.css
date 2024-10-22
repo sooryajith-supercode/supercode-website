@@ -19,8 +19,8 @@
 }
 
 .AnimationLogoWrapcontent {
-    background: rgba(64, 81, 74, 0.10);
-    backdrop-filter: blur(5px);
+    background: rgba(64, 81, 74, 0.10);    /* background: rgba(255, 255, 255, 0.10); */
+    backdrop-filter: blur(3px);
 }
 
 

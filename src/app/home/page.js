@@ -164,13 +164,13 @@ export default function Home() {
             <div className={styles?.AnimationLogoWrap} ref={animationWrapRef}>
                 <div>
                     <div className={`${styles?.resultsWrapLogo}`} ref={resultsWrapLogoRef}>
-                        <Canvas style={{ width: "100%", height: "500px" }}>
-                            <ambientLight intensity={4.5} />
-                            <pointLight position={[1, 1, 1]} intensity={3} />
-                            <pointLight position={[-1, -1, -1]} intensity={.5} />
-                            <directionalLight position={[0, 1, 2]} intensity={2} castShadow={true} />
+                        <Canvas style={{ width: "100%", height: "540px" }}>
+                            <ambientLight intensity={.2} />
+                            <pointLight position={[1, 1, 1]} intensity={10} />
+                            <pointLight position={[-1, -1, -1]} intensity={10} />
+                            <directionalLight position={[-1, 0, 3]} intensity={5}  />
                             <AutoRotateLogo />
-                            <PerspectiveCamera makeDefault position={[0, 0, 2]} fov={32} near={0.1} far={500} />
+                            <PerspectiveCamera makeDefault position={[0, 0, 2]} fov={38} near={0.1} far={500} />
                         </Canvas>
                     </div>
                     <div className={styles?.AnimationLogoWrapcontent}>
