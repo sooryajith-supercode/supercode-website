@@ -21,9 +21,9 @@ export default function SuperHits({ superhits }) {
             gsap.timeline({
                 scrollTrigger: {
                     trigger: card,
-                    start: 'top bottom', // Start animation when the top of the card hits the bottom of the viewport
-                    end: 'top center+=100', // End point (you can adjust this value)
-                    toggleActions: 'play none none reverse', // Play on enter, reverse on scroll back
+                    start: 'top bottom+=100', // Start animation when the top of the card hits the bottom of the viewport
+                    end: 'top center', // End point (you can adjust this value)
+                    toggleActions: 'play none none none', // Play on enter, reverse on scroll back
                     onEnter: () => {
                         // Animate the card when entering the viewport
                         gsap.to(card, {
