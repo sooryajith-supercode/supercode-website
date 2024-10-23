@@ -42,12 +42,11 @@ export default function Footer() {
         // GSAP scroll animation for the footer container
         const scrollAnimation = gsap.to(footerRef.current, {
             backgroundColor: "#072AC5",
-            duration: 0.5,
+            duration: 1,
             scrollTrigger: {
                 trigger: footerRef.current,
-                start: "top center+=400",
+                start: "top center+=300",
                 end: "bottom bottom",
-                scrub: true,
                 // markers: true,
             },
         });

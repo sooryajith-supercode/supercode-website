@@ -14,38 +14,39 @@ export default function SuperHits({ superhits }) {
     useEffect(() => {
         const cards = projectsWrapRef.current.children;
 
-        // Set the initial state for each card (hidden and moved down)
-        gsap.set(cards, { y: 200});
+        // Set the initial state for each card (hidden and moved down off-screen)
+        gsap.set(cards, { y: 400 }); // Start from the bottom of the viewport
 
         gsap.utils.toArray(cards).forEach((card, index) => {
             gsap.timeline({
                 scrollTrigger: {
                     trigger: card,
-                    start: 'top center+=200',
-                    end: 'bottom bottom-=200',
+                    start: 'top bottom', // Start animation when the top of the card hits the bottom of the viewport
+                    end: 'top center+=100', // End point (you can adjust this value)
                     toggleActions: 'play none none reverse', // Play on enter, reverse on scroll back
                     onEnter: () => {
                         // Animate the card when entering the viewport
                         gsap.to(card, {
-                            y: 0,
+                            y: 0, // Move to original position
                             opacity: 1,
                             duration: 2,
-                            delay: index % 2 === 0 ? 0.1 : 0.5, // Different delays for odd/even cards
+                            delay: index % 2 === 0 ? 0.3 : 0.8, // Different delays for odd/even cards
                         });
                     },
                     onLeaveBack: () => {
                         // Animate the card when leaving back (scrolling up)
                         gsap.to(card, {
-                            y: 200,
-                            duration:2,
-                            delay: index % 2 === 0 ? 0.5 : 0.1, // Ensure delay for odd/even on leave
+                            y: 400, // Move back to the bottom of the viewport
+                            duration: 2,
+                            delay: index % 2 === 0 ? 0.8 : 0.3, // Ensure delay for odd/even on leave
                         });
                     },
-                    // markers:true,
-                    scrub:3,
+                    // markers: true,
+                    scrub: 3, // Smooth scroll animation
                 }
             });
         });
+
 
         return () => {
             // Clean up ScrollTriggers
