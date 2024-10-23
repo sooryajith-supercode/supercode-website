@@ -28,7 +28,7 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                     ease: "power2.inOut",
                     scrollTrigger: {
                         trigger: secondCard,
-                        start: "top center",
+                        start: "top center+=400",
                         end: "top+=100 center",
                         scrub: 1,
                         // markers:true,
