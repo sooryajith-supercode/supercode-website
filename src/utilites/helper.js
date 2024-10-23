@@ -268,7 +268,7 @@ export const HomePage = {
             {
                 title: "McLaren Strategic Solutions",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "Twinsights",
