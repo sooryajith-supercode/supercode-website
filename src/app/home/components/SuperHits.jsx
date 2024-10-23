@@ -14,45 +14,36 @@ export default function SuperHits({ superhits }) {
     useEffect(() => {
         const cards = projectsWrapRef.current.children;
 
-        // Set the initial state for each card (hidden and moved down off-screen)
-        gsap.set(cards, { y: 400 }); // Start from the bottom of the viewport
+        // Set the initial state for each card
+        gsap.set(cards, { y: 400, opacity: 0 }); // Also set opacity to 0 initially
 
         gsap.utils.toArray(cards).forEach((card, index) => {
             gsap.timeline({
                 scrollTrigger: {
                     trigger: card,
-                    start: 'top bottom+=100', // Start animation when the top of the card hits the bottom of the viewport
-                    end: 'top center', // End point (you can adjust this value)
-                    toggleActions: 'play none none none', // Play on enter, reverse on scroll back
-                    onEnter: () => {
-                        // Animate the card when entering the viewport
-                        gsap.to(card, {
-                            y: 0, // Move to original position
-                            opacity: 1,
-                            duration: 2,
-                            delay: index % 2 === 0 ? 0.3 : 0.8, // Different delays for odd/even cards
-                        });
-                    },
-                    onLeaveBack: () => {
-                        // Animate the card when leaving back (scrolling up)
-                        gsap.to(card, {
-                            y: 400, // Move back to the bottom of the viewport
-                            duration: 2,
-                            delay: index % 2 === 0 ? 0.8 : 0.3, // Ensure delay for odd/even on leave
-                        });
-                    },
-                    // markers: true,
+                    start: 'top bottom+=100',
+                    end: 'top center',
+                    toggleActions: 'play none none none',
                     scrub: 3, // Smooth scroll animation
-                }
-            });
+                    // markers: true,
+                },
+            })
+                .to(card, {
+                    y: 0, 
+                    opacity: 1,
+                    duration: .5,
+                    ease: "power2.inOut", 
+                    delay: index % 2 === 0 ? 0.1 : 0.2, 
+                })
+                
         });
-
 
         return () => {
             // Clean up ScrollTriggers
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
     }, []);
+
 
 
     return (
