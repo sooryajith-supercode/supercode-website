@@ -17,44 +17,40 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
         const secondCard = cardRef.current;
         const firstCardIcon = firstCardIconRef.current;
 
-
         if (cardWrapElement && secondCard && firstCardIcon) {
-            gsap.fromTo(
-                secondCard,
-                { y: 0 },
-                {
-                    y: -180,
-                    duration: 2,
-                    ease: "power2.inOut",
-                    scrollTrigger: {
-                        trigger: secondCard,
-                        start: "top center+=400",
-                        end: "top+=100 center",
-                        scrub: 1,
-                        // markers:true,
-                        onEnter: () => {
-                            gsap.to(firstCardIcon, {
-                                opacity: 0,
-                                duration:1,
-                            });
-                        },
-                        onLeaveBack: () => {
-                            gsap.to(firstCardIcon, {
-                                opacity: 1,
-                                duration:1,
-                            });
-                        },
-                    },
-                }
-            );
+            //initial states
+            gsap.set(secondCard, { y: "0px",duration: .5,  });
+            gsap.set(firstCardIcon, { opacity: 1 });
+
+            //timeline for animations
+            const masterTimeline = gsap.timeline({
+                scrollTrigger: {
+                    trigger: cardWrapElement, 
+                    start: "top center-=200",
+                    end: "top center-=300",
+                    scrub: 3,
+                    // markers:true,
+
+                },
+            });
+
+            masterTimeline
+            .to(secondCard, { y: "-180", duration: 2.5,  }, 0) 
+            .to(firstCardIcon, { opacity: 0, duration: 1,  }, 1); 
+
+            return () => {
+                // Clean up on unmount
+                ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+                gsap.killTweensOf([secondCard, firstCardIcon]);
+            };
         }
-    }, []);
+    }, [serviceData]);
 
     return (
         <div>
             <div className={`${styles?.whatwedoHeading}`}>
                 <div className="container">
-                    <h2 className="text-4-med ">{heading}</h2>
+                    <h2 className="text-4-med">{heading}</h2>
                 </div>
             </div>
             <div className={styles?.ServiceCardWrap} ref={cardwrapRef}>
@@ -64,9 +60,8 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                         <div
                             className={styles?.ServiceCard}
                             key={index}
-                            style={{ backgroundColor: cardColor,transition:"ease 0.2s" }}
+                            style={{ backgroundColor: cardColor, transition: "ease 0.2s" }}
                             ref={index === 1 ? cardRef : null}
-
                         >
                             <div className={`${styles?.ServiceCardText} container`}>
                                 <div className={`${styles?.ServiceCardTextContent}`}>
@@ -76,7 +71,7 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                                 <div
                                     className={styles?.ServiceCardIcon}
                                     dangerouslySetInnerHTML={{ __html: e.icon }}
-                                    ref={index === 0 ? firstCardIconRef : null} 
+                                    ref={index === 0 ? firstCardIconRef : null}
                                 />
                             </div>
                         </div>
