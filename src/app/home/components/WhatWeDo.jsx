@@ -28,9 +28,10 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                     ease: "power2.inOut",
                     scrollTrigger: {
                         trigger: secondCard,
-                        start: "top+=100 center",
+                        start: "top center",
                         end: "top+=100 center",
                         scrub: 1,
+                        // markers:true,
                         onEnter: () => {
                             gsap.to(firstCardIcon, {
                                 opacity: 0,
@@ -43,7 +44,6 @@ const WhatWeDo = React.memo(function WhatWeDo({ whatwedo }) {
                                 duration:1,
                             });
                         },
-                        // markers:true,
                     },
                 }
             );

@@ -13,33 +13,47 @@ export default function SuperHits({ superhits }) {
 
     useEffect(() => {
         const cards = projectsWrapRef.current.children;
-    
-        // Using gsap.utils.toArray to create a stagger effect
+
+        // Set the initial state for each card (hidden and moved down)
+        gsap.set(cards, { y: 200, opacity: 0 });
+
         gsap.utils.toArray(cards).forEach((card, index) => {
-            gsap.fromTo(card, 
-                { y: 200, opacity: 0 }, 
-                {
-                    y: 0,
-                    opacity: 1,
-                    duration: 0.5, // Animation duration
-                    scrollTrigger: {
-                        trigger: card,
-                        start: 'top center+=300', // Adjust this to control when the animation starts
-                        end: 'bottom bottom-=200',
-                        toggleActions: 'play none none reverse',
-                        // markers: true,
+            gsap.timeline({
+                scrollTrigger: {
+                    trigger: card,
+                    start: 'top center+=200',
+                    end: 'bottom bottom-=200',
+                    toggleActions: 'play none none reverse', // Play on enter, reverse on scroll back
+                    onEnter: () => {
+                        // Animate the card when entering the viewport
+                        gsap.to(card, {
+                            y: 0,
+                            opacity: 1,
+                            duration: 0.5,
+                            delay: index % 2 === 0 ? 0.1 : 0.8, // Different delays for odd/even cards
+                        });
                     },
-                    
-                    delay: index % 2 === 0 ? 0.1 : 0.8, // Adjust the delays for staggered effect
+                    onLeaveBack: () => {
+                        // Animate the card when leaving back (scrolling up)
+                        gsap.to(card, {
+                            y: 200,
+                            opacity: 0,
+                            duration: 0.5,
+                            delay: index % 2 === 0 ? 0.8 : 0.1, // Ensure delay for odd/even on leave
+                        });
+                    },
+                    // markers:true,
+                    scrub:1,
                 }
-            );
+            });
         });
-    
+
         return () => {
             // Clean up ScrollTriggers
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
-    }, []);    
+    }, []);
+
 
     return (
         <div className={styles?.superHitsWrap}>
