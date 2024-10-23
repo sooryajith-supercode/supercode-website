@@ -278,12 +278,12 @@ export const HomePage = {
             {
                 title: "LetsTransport",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "Lupin Digital Health",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "Analytica Chemie",
@@ -293,7 +293,7 @@ export const HomePage = {
             {
                 title: "Zeel beauty",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "Ather Energy",
@@ -308,7 +308,7 @@ export const HomePage = {
             {
                 title: "DNA Networks",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "Ekata Coffee",
@@ -323,7 +323,7 @@ export const HomePage = {
             {
                 title: "Synqua Games",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "Brunel Logistics, UK",
@@ -333,7 +333,7 @@ export const HomePage = {
             {
                 title: "Budy.ai",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "Trojan Ply",
@@ -348,7 +348,7 @@ export const HomePage = {
             {
                 title: "Compassdoon",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "India for Change.org",
@@ -358,7 +358,7 @@ export const HomePage = {
             {
                 title: "Leeboy India",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
             {
                 title: "Qlite Global",
@@ -368,7 +368,7 @@ export const HomePage = {
             {
                 title: "GreenSol Group",
                 slug: "/",
-                image: "/assets/project-img.png",
+                image: "/assets/bg-demo1.jpg",
             },
         ]
     }

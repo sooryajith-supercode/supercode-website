@@ -8,6 +8,7 @@ export default function Clients({ clients }) {
     const [hoveredClient, setHoveredClient] = useState(null);
     const [transformID, setTransformID] = useState(null);
     const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 }); // image position
+    const [isCursorInsideClientWrap, setIsCursorInsideClientWrap] = useState(false); // new state
     const hoveredImageRef = useRef(null);
 
     // show image
@@ -21,7 +22,7 @@ export default function Clients({ clients }) {
         }
     };
 
-    //hide image
+    // hide image
     const hideImage = (transformID) => {
         if (transformID) {
             gsap.to('#' + transformID, {
@@ -33,17 +34,17 @@ export default function Clients({ clients }) {
     };
 
     useEffect(() => {
-        if (hoveredClient) {
+        if (hoveredClient && isCursorInsideClientWrap) {
             showImage(transformID);
         } else {
             hideImage(transformID);
         }
-    }, [hoveredClient, transformID]); 
+    }, [hoveredClient, transformID, isCursorInsideClientWrap]); 
 
     // Function to handle mouse movement and set the image at the cursor position
     const handleMouseMove = (event) => {
         const { clientX, clientY } = event;
-        const offsetY = 100; //adjust image osition
+        const offsetY = 100; // adjust image position
         setImagePosition({ x: clientX, y: clientY - offsetY });
     };
 
@@ -51,7 +52,14 @@ export default function Clients({ clients }) {
         <div className={styles?.clientContainer}>
             <div className="container">
                 <h2 className="text-4-med textClrBlack">{heading}</h2>
-                <div className={styles?.clientContentWrap}>
+                <div 
+                    className={styles?.clientContentWrap}
+                    onMouseEnter={() => setIsCursorInsideClientWrap(true)} // Track if cursor is inside
+                    onMouseLeave={() => {
+                        setIsCursorInsideClientWrap(false); // Track if cursor leaves
+                        setHoveredClient(null); // Reset hovered client when leaving
+                    }}
+                >
                     <div className={`${styles?.clientwrap} text-1 textClrBlack`}>
                         {clientLinks && clientLinks.length > 0 ? (
                             clientLinks.map((client, index) => (
@@ -73,22 +81,24 @@ export default function Clients({ clients }) {
                                     {index < clientLinks.length - 1 && ' / '}
 
                                     {/* Show the image at the cursor position */}
-                                    <div
-                                        id={'hoverImage' + index}
-                                        className={styles?.hoveredImageWrap}
-                                        style={{
-                                            opacity: hoveredClient === client.title ? 1 : 0,
-                                            zIndex: hoveredClient === client.title ? 9999 : -9999,
-                                            position: 'fixed',
-                                            pointerEvents: 'none',
-                                            left: `${imagePosition.x}px`,
-                                            top: `${imagePosition.y}px`,
-                                            transform: 'translate(-50%, -50%)', 
-                                            transition: "opacity 0s ease, left 0s ease, top 0s ease",
-                                        }}
-                                    >
-                                        <img src={client.image} alt={client.title} className={styles?.hoveredImage} />
-                                    </div>
+                                    {isCursorInsideClientWrap && ( // Only render if cursor is inside
+                                        <div
+                                            id={'hoverImage' + index}
+                                            className={styles?.hoveredImageWrap}
+                                            style={{
+                                                opacity: hoveredClient === client.title ? 1 : 0,
+                                                zIndex: hoveredClient === client.title ? 9999 : -9999,
+                                                position: 'fixed',
+                                                pointerEvents: 'none',
+                                                left: `${imagePosition.x}px`,
+                                                top: `${imagePosition.y}px`,
+                                                transform: 'translate(-50%, -50%)', 
+                                                transition: "opacity 0s ease, left 0s ease, top 0s ease",
+                                            }}
+                                        >
+                                            <img src={client.image} alt={client.title} className={styles?.hoveredImage} />
+                                        </div>
+                                    )}
                                 </div>
                             ))
                         ) : (
