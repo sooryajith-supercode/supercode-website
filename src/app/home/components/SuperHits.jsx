@@ -15,7 +15,7 @@ export default function SuperHits({ superhits }) {
         const cards = projectsWrapRef.current.children;
 
         // Set the initial state for each card (hidden and moved down)
-        gsap.set(cards, { y: 200, opacity: 0 });
+        gsap.set(cards, { y: 200});
 
         gsap.utils.toArray(cards).forEach((card, index) => {
             gsap.timeline({
@@ -29,21 +29,20 @@ export default function SuperHits({ superhits }) {
                         gsap.to(card, {
                             y: 0,
                             opacity: 1,
-                            duration: 0.5,
-                            delay: index % 2 === 0 ? 0.1 : 0.8, // Different delays for odd/even cards
+                            duration: 2,
+                            delay: index % 2 === 0 ? 0.1 : 0.5, // Different delays for odd/even cards
                         });
                     },
                     onLeaveBack: () => {
                         // Animate the card when leaving back (scrolling up)
                         gsap.to(card, {
                             y: 200,
-                            opacity: 0,
-                            duration: 0.5,
-                            delay: index % 2 === 0 ? 0.8 : 0.1, // Ensure delay for odd/even on leave
+                            duration:2,
+                            delay: index % 2 === 0 ? 0.5 : 0.1, // Ensure delay for odd/even on leave
                         });
                     },
                     // markers:true,
-                    scrub:1,
+                    scrub:3,
                 }
             });
         });

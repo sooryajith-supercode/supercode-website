@@ -192,7 +192,7 @@ export const HomePage = {
         hitprojects: [
             {
                 title: "Project headline in two lines highlighting achievements.",
-                image: "/assets/project-img-demo.png",
+                image: "/assets/sec-img-demo1.jpg",
                 clientName: "Client Name",
                 buttonDesign: {
                     label: "Web Design", slug: "/"
@@ -203,7 +203,7 @@ export const HomePage = {
             },
             {
                 title: "Project headline in two lines highlighting achievements.Project headline in two lines highlighting achievements.",
-                image: "/assets/project-img-demo.png",
+                image: "/assets/sec-img-demo1.jpg",
                 clientName: "Client Name",
                 buttonDesign: {
                     label: "Web Design", slug: "/"
@@ -214,7 +214,7 @@ export const HomePage = {
             },
             {
                 title: "Project headline in two lines highlighting achievements.",
-                image: "/assets/project-img-demo.png",
+                image: "/assets/sec-img-demo1.jpg",
                 clientName: "Client Name",
                 buttonDesign: {
                     label: "Web Design", slug: "/"
@@ -225,7 +225,7 @@ export const HomePage = {
             },
             {
                 title: "Project headline in two lines highlighting achievements.",
-                image: "/assets/project-img-demo.png",
+                image: "/assets/sec-img-demo1.jpg",
                 clientName: "Client Name",
                 buttonDesign: {
                     label: "Web Design", slug: "/"
@@ -236,7 +236,7 @@ export const HomePage = {
             },
             {
                 title: "Project headline in two lines highlighting achievements.",
-                image: "/assets/project-img-demo.png",
+                image: "/assets/sec-img-demo1.jpg",
                 clientName: "Client Name",
                 buttonDesign: {
                     label: "Web Design", slug: "/"
@@ -247,7 +247,7 @@ export const HomePage = {
             },
             {
                 title: "Project headline in two lines highlighting achievements.",
-                image: "/assets/project-img-demo.png",
+                image: "/assets/sec-img-demo1.jpg",
                 clientName: "Client Name",
                 buttonDesign: {
                     label: "Web Design", slug: "/"

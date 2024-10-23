@@ -7,11 +7,11 @@ export default function Clients({ clients }) {
     const { heading, clientLinks } = clients || {};
     const [hoveredClient, setHoveredClient] = useState(null);
     const [transformID, setTransformID] = useState(null);
-    const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 }); // image position
-    const [isCursorInsideClientWrap, setIsCursorInsideClientWrap] = useState(false); // new state
+    const [imagePosition, setImagePosition] = useState({ x: 0, y: 0 }); 
+    const [isCursorInsideClientWrap, setIsCursorInsideClientWrap] = useState(false);
     const hoveredImageRef = useRef(null);
 
-    // show image
+    // Show image
     const showImage = (transformID) => {
         if (transformID) {
             gsap.to('#' + transformID, {
@@ -22,7 +22,7 @@ export default function Clients({ clients }) {
         }
     };
 
-    // hide image
+    // Hide image
     const hideImage = (transformID) => {
         if (transformID) {
             gsap.to('#' + transformID, {
@@ -39,12 +39,12 @@ export default function Clients({ clients }) {
         } else {
             hideImage(transformID);
         }
-    }, [hoveredClient, transformID, isCursorInsideClientWrap]); 
+    }, [hoveredClient, transformID, isCursorInsideClientWrap]);
 
-    // Function to handle mouse movement and set the image at the cursor position
+    // Handle mouse movement and set the image at the cursor position
     const handleMouseMove = (event) => {
         const { clientX, clientY } = event;
-        const offsetY = 100; // adjust image position
+        const offsetY = 100; // Adjust image position
         setImagePosition({ x: clientX, y: clientY - offsetY });
     };
 
@@ -81,7 +81,7 @@ export default function Clients({ clients }) {
                                     {index < clientLinks.length - 1 && ' / '}
 
                                     {/* Show the image at the cursor position */}
-                                    {isCursorInsideClientWrap && ( // Only render if cursor is inside
+                                    {isCursorInsideClientWrap && ( 
                                         <div
                                             id={'hoverImage' + index}
                                             className={styles?.hoveredImageWrap}
