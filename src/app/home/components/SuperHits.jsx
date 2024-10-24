@@ -10,64 +10,59 @@ gsap.registerPlugin(ScrollTrigger);
 export default function SuperHits({ superhits }) {
     const { heading, hitprojects, button } = superhits || {};
     const projectsWrapRef = useRef(null);
+    const projectsContaRef = useRef(null); 
 
     useEffect(() => {
         const cards = projectsWrapRef.current.children;
 
-        // Set the initial state for each card
-        gsap.set(cards, { y: 200, opacity: 0 });
+        // initial state
+        gsap.set(cards, { opacity: 1 }); 
 
         gsap.utils.toArray(cards).forEach((card, index) => {
-            const timeline = gsap.timeline({
+            const isOdd = (index + 1) % 2 !== 0; 
+
+            const startY = isOdd ? 300 : 400; 
+            const endY = isOdd ? -10: 0;    
+
+            // Create a timeline for each card
+            gsap.timeline({
                 scrollTrigger: {
                     trigger: card,
-                    start: 'top bottom+=100',  // Same scroll trigger for both
-                    end: 'top top',
-                    toggleActions: 'play none none none',
-                    scrub: 3, // Smooth scroll animation
-                    // markers: true,
+                    start: 'top bottom+=300',  
+                    end: 'top top',            
+                    scrub: true,                 
+                    toggleActions: 'play none none none', 
+                    markers: false,            
                 },
+            })
+            .set(card, { y: startY })        
+            .to(card, {
+                y: endY,                       
+                opacity: 1,                    
+                duration: 1,                   
+                ease: "power2.inOut",
             });
-
-            if (index % 2 === 0) {
-                // Animation for even cards
-                timeline.to(card, {
-                    y: 0, 
-                    opacity: 1,
-                    duration: 0.5,
-                    ease: "power2.inOut", 
-                    delay: 0.1, // Delay specific to even cards
-                });
-            } else {
-                // Animation for odd cards
-                timeline.to(card, {
-                    y: 0, 
-                    opacity: 1,
-                    duration: 0.5,
-                    ease: "power2.inOut", 
-                    delay: 0.15, // Delay specific to odd cards
-                });
-            }
         });
 
         return () => {
-            // Clean up ScrollTriggers
+            // Clean up ScrollTriggers to prevent memory leaks
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
     }, []);
 
     return (
-        <div className={styles?.superHitsWrap}>
+        <div className={styles.superHitsWrap} ref={projectsContaRef}>
             <div className="container">
                 <h2 className="heading-3 textClrBlack">{heading}</h2>
 
-                <div className={styles?.ProjectsWrap} ref={projectsWrapRef}>
+                <div className={styles.ProjectsWrap} ref={projectsWrapRef}>
                     <SuperHitCard data={hitprojects} />
                 </div>
+                
                 <div className="tac">
                     <PrimaryButton
-                        label={button.label}
-                        href={button.slug}
+                        label={button?.label}
+                        href={button?.slug}
                     />
                 </div>
             </div>

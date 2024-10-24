@@ -7,7 +7,7 @@
 
 
 .ProjectsWrap {
-    padding-top: 60px;
+    padding: 60px 0 140px;
     display: flex;
     align-items: center;
     flex-wrap: wrap;
