@@ -26,6 +26,7 @@ export default function Footer() {
     const [rotation, setRotation] = useState([0, 0, 0]);
     const [canvasVisible, setCanvasVisible] = useState(false); 
     const [logoScale, setLogoScale] = useState([0.1, 0.1, 0.1]); 
+    const [logoPosition, setLogoPosition] = useState([0, -.003, 0]); 
     let scrollTimeout;
 
     // Update camera position based on slider value
@@ -108,19 +109,19 @@ const handleScrollEnd = () => {
          ScrollTrigger.create({
             trigger: footerRef.current,
             start: "top bottom", // Start when the footer top hits the bottom of the viewport
-            onEnter: () => setCanvasVisible(true),  // Show the canvas when entering the footer
-            onLeaveBack: () => setCanvasVisible(false), // Hide the canvas when scrolling back up
-            markers: false, // Enable for debugging
+            onEnter: () => setCanvasVisible(true),  
+            onLeaveBack: () => setCanvasVisible(false), 
+            markers: false, 
         });
 
         // Cleanup on unmount
         return () => {
             // Kill all GSAP triggers
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-            // Kill GSAP tweens for specific elements
+    
             gsap.killTweensOf(footerRef.current);
             gsap.killTweensOf(canvasRef.current);
-            // Remove event listeners
+            
             window.removeEventListener('scroll', handleScrollStart);
             window.removeEventListener('scroll', handleScrollEnd);
             clearTimeout(scrollTimeout);
@@ -134,10 +135,19 @@ const handleScrollEnd = () => {
             // Adjust the scale based on screen width
             if (width < 768) {
                 setLogoScale([0.05, 0.05, 0.05]);
+                setLogoPosition([0, -.001, 0]); 
             } else if (width >= 768 && width < 1200) {
                 setLogoScale([0.08, 0.08, 0.08]);
-            } else {
+                setLogoPosition([0, -.0033, 0]); 
+            } else if (width <= 1400){
+                setLogoScale([0.085, 0.085, 0.085]);
+                setLogoPosition([0, -.0039, 0]); 
+            }else if (width <=1600){
+                setLogoScale([0.078, 0.078, 0.078]);
+                setLogoPosition([0, -.0039, 0]); 
+            }else {
                 setLogoScale([0.1, 0.1, 0.1]); 
+                setLogoPosition([0, -.0045, 0]); 
             }
         };
 
@@ -261,7 +271,8 @@ const handleScrollEnd = () => {
                     <OrbitControls ref={orbitControlsRef} autoRotateSpeed={0.8} />
                     <BlueINflateLogo
                         rotation={rotationPosition}
-                        position={[0, -.0043, 0]}
+                        position={logoPosition}
+                        // [0, -.0043, 0] 
                         scale={logoScale}
                     />
                 </Canvas>
