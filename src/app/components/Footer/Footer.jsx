@@ -20,8 +20,12 @@ export default function Footer() {
     const canvasRef = useRef(null); // Ref to access the canvas
     const footerRef = useRef(null); // Ref to the footer container
     const [cameraPosition, setCameraPosition] = useState([-3.50, 4.80, 1.20]); // Your camera position
+    const [rotationPosition, setrotationPosition] = useState([1.62, 0.05, -1.05]); // Your camera position
     const [fovValue, setFovValue] = useState(0.28);
     const orbitControlsRef = useRef(null);
+    const [rotation, setRotation] = useState([0, 0, 0]);
+    const [canvasVisible, setCanvasVisible] = useState(false); 
+    const [logoScale, setLogoScale] = useState([0.1, 0.1, 0.1]); 
     let scrollTimeout;
 
     // Update camera position based on slider value
@@ -31,6 +35,12 @@ export default function Footer() {
     //     setCameraPosition(newPosition);
     // };
 
+ // Update rotation based on slider value
+ const handleSliderChange = (axis, value) => {
+    const newRotation = [...rotation];
+    newRotation[axis] = value;
+    setRotation(newRotation);
+};
     useEffect(() => {
         // Register ScrollTrigger
         gsap.registerPlugin(ScrollTrigger);
@@ -63,29 +73,45 @@ export default function Footer() {
                 onUpdate: (self) => {
                     // Map scroll progress to fov and camera y position
                     const newFov = gsap.utils.mapRange(0, 1, 0.25, 0.11, self.progress);
-                    const newYPosition = gsap.utils.mapRange(0, 1, 4.80, 0.60, self.progress);
-                    setFovValue(newFov);
+                    const newYPosition = gsap.utils.mapRange(0, 1, -4.80, 0.60, self.progress);
+                    const newXrotation = gsap.utils.mapRange(0, 1, -1.62, 1.62, self.progress);
+                    setFovValue(newFov)
                     setCameraPosition([-3.50, newYPosition, 1.20]);
+                    setrotationPosition([newXrotation, 0.05, -1.05]);
                 },
             },
         });
-        // Manage scroll event to toggle autoRotate
-        const handleScrollStart = () => {
-            orbitControlsRef.current.autoRotate = false; // Disable auto-rotate on scroll
-            gsap.to(orbitControlsRef.current, { autoRotate: false });
-            clearTimeout(scrollTimeout);
-        };
+       // Manage scroll event to toggle autoRotate
+const handleScrollStart = () => {
+    // Check if orbitControlsRef.current is not null before accessing it
+    if (orbitControlsRef.current) {
+        orbitControlsRef.current.autoRotate = false; // Disable auto-rotate on scroll
+        gsap.to(orbitControlsRef.current, { autoRotate: false });
+    }
+    clearTimeout(scrollTimeout);
+};
 
-        const handleScrollEnd = () => {
-            scrollTimeout = setTimeout(() => {
-                orbitControlsRef.current.autoRotate = true; // Enable auto-rotate after scrolling stops
-                gsap.to(orbitControlsRef.current, { autoRotate: true });
-            }, 200); // Adjust timeout duration as needed
-        };
+const handleScrollEnd = () => {
+    if (orbitControlsRef.current) {
+        scrollTimeout = setTimeout(() => {
+            orbitControlsRef.current.autoRotate = true; // Enable auto-rotate after scrolling stops
+            gsap.to(orbitControlsRef.current, { autoRotate: true });
+        }, 200); // Adjust timeout duration as needed
+    }
+};
 
         // Event listeners for scroll events
         window.addEventListener('scroll', handleScrollStart);
         window.addEventListener('scroll', handleScrollEnd);
+
+         // GSAP scroll trigger to control canvas visibility
+         ScrollTrigger.create({
+            trigger: footerRef.current,
+            start: "top bottom", // Start when the footer top hits the bottom of the viewport
+            onEnter: () => setCanvasVisible(true),  // Show the canvas when entering the footer
+            onLeaveBack: () => setCanvasVisible(false), // Hide the canvas when scrolling back up
+            markers: false, // Enable for debugging
+        });
 
         // Cleanup on unmount
         return () => {
@@ -99,6 +125,30 @@ export default function Footer() {
             window.removeEventListener('scroll', handleScrollEnd);
             clearTimeout(scrollTimeout);
         };
+    }, []);
+
+    useEffect(() => {
+        const handleResize = () => {
+            const width = window.innerWidth;
+
+            // Adjust the scale based on screen width
+            if (width < 768) {
+                setLogoScale([0.05, 0.05, 0.05]);
+            } else if (width >= 768 && width < 1200) {
+                setLogoScale([0.08, 0.08, 0.08]);
+            } else {
+                setLogoScale([0.1, 0.1, 0.1]); 
+            }
+        };
+
+        // Initial setup
+        handleResize();
+
+        // Add event listener
+        window.addEventListener('resize', handleResize);
+
+        // Clean up event listener on unmount
+        return () => window.removeEventListener('resize', handleResize);
     }, []);
 
 
@@ -195,73 +245,27 @@ export default function Footer() {
                                         ) : (
                                             <span>{e.label || 'Missing Link'}</span>
                                         )}
-                                    </li>
+                                  </li>
                                 ))}
                             </ul>
                         </div>
                     </div>
                 </div>
             </div>
-            <div className={styles?.FooterAnimationLogo}>
-                <div className="container">
-                    <div className={styles?.FooterAnimation3d} ref={canvasRef}>
-                        <Canvas camera={{ position: cameraPosition, }}  >
-                            <CameraController cameraPosition={cameraPosition} fovValue={fovValue} /> {/* [-3.50, 0.60, 1.20]*/}
-                            <ambientLight intensity={1.5} />
-                            <directionalLight
-                                intensity={1}
-
-                            />
-                            <OrbitControls ref={orbitControlsRef} autoRotateSpeed={0.8} />
-
-                            <BlueINflateLogo
-                                rotation={[1.62, 0.05, -1.05]}
-                                position={[0, 0, 0]}
-                                scale={[0.1, 0.1, 0.1]}
-
-                            />
-                        </Canvas>
-
-                    </div>
-
-
-                    {/* <div className={styles?.cameraControl}>
-                        <div>
-                            <label>X Camera Position: {cameraPosition[0].toFixed(2)}</label>
-                            <input
-                                type="range"
-                                min={-10}
-                                max={10}
-                                step={0.1}
-                                value={cameraPosition[0]}
-                                onChange={(e) => handleCameraChange(0, parseFloat(e.target.value))}
-                            />
-                        </div>
-                        <div>
-                            <label>Y Camera Position: {cameraPosition[1].toFixed(2)}</label>
-                            <input
-                                type="range"
-                                min={-10}
-                                max={10}
-                                step={0.1}
-                                value={cameraPosition[1]}
-                                onChange={(e) => handleCameraChange(1, parseFloat(e.target.value))}
-                            />
-                        </div>
-                        <div>
-                            <label>Z Camera Position: {cameraPosition[2].toFixed(2)}</label>
-                            <input
-                                type="range"
-                                min={-10}
-                                max={10}
-                                step={0.1}
-                                value={cameraPosition[2]}
-                                onChange={(e) => handleCameraChange(2, parseFloat(e.target.value))}
-                            />
-                        </div>
-                    </div> */}
-                </div>
-            </div>
+                {/* Conditionally render the Canvas */}
+            {canvasVisible && (
+                <Canvas camera={{ position: cameraPosition }} style={{height: "100vh", position: "fixed", bottom: 0 }} ref={canvasRef}>
+                    <CameraController cameraPosition={cameraPosition} fovValue={fovValue} />
+                    <ambientLight intensity={1.5} />
+                    <directionalLight intensity={1} />
+                    <OrbitControls ref={orbitControlsRef} autoRotateSpeed={0.8} />
+                    <BlueINflateLogo
+                        rotation={rotationPosition}
+                        position={[0, -.0043, 0]}
+                        scale={logoScale}
+                    />
+                </Canvas>
+            )}
         </div>
     );
 }

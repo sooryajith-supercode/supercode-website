@@ -15,27 +15,39 @@ export default function SuperHits({ superhits }) {
         const cards = projectsWrapRef.current.children;
 
         // Set the initial state for each card
-        gsap.set(cards, { y: 400, opacity: 0 }); // Also set opacity to 0 initially
+        gsap.set(cards, { y: 200, opacity: 0 });
 
         gsap.utils.toArray(cards).forEach((card, index) => {
-            gsap.timeline({
+            const timeline = gsap.timeline({
                 scrollTrigger: {
                     trigger: card,
-                    start: 'top bottom+=100',
-                    end: 'top center',
+                    start: 'top bottom+=100',  // Same scroll trigger for both
+                    end: 'top top',
                     toggleActions: 'play none none none',
                     scrub: 3, // Smooth scroll animation
                     // markers: true,
                 },
-            })
-                .to(card, {
+            });
+
+            if (index % 2 === 0) {
+                // Animation for even cards
+                timeline.to(card, {
                     y: 0, 
                     opacity: 1,
-                    duration: .5,
+                    duration: 0.5,
                     ease: "power2.inOut", 
-                    delay: index % 2 === 0 ? 0.1 : 0.2, 
-                })
-                
+                    delay: 0.1, // Delay specific to even cards
+                });
+            } else {
+                // Animation for odd cards
+                timeline.to(card, {
+                    y: 0, 
+                    opacity: 1,
+                    duration: 0.5,
+                    ease: "power2.inOut", 
+                    delay: 0.15, // Delay specific to odd cards
+                });
+            }
         });
 
         return () => {
@@ -43,8 +55,6 @@ export default function SuperHits({ superhits }) {
             ScrollTrigger.getAll().forEach(trigger => trigger.kill());
         };
     }, []);
-
-
 
     return (
         <div className={styles?.superHitsWrap}>
