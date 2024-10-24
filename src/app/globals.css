@@ -1,10 +1,44 @@
 @font-face {
   font-family: 'PP Right Grotesk';
-  src: url('/fonts/PPRightGrotesk/PPRightGrotesk-Regular.woff2') format('woff2'),
-    url('/fonts/PPRightGrotesk/PPRightGrotesk-Regular.woff') format('woff');
-  font-style: normal;
+  src: url('/fonts/PPRightGrotesk-Light.woff2') format('woff2'),
+       url('/fonts/PPRightGrotesk-Light.woff') format('woff');
+  font-weight: 300; /* Light weight */
   font-display: swap;
 }
+
+@font-face {
+  font-family: 'PP Right Grotesk';
+  src: url('/fonts/PPRightGroteskText-Regular.woff2') format('woff2'),
+       url('/fonts/PPRightGroteskText-Regular.woff') format('woff');
+  font-weight: 400; /* Regular weight */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Right Grotesk';
+  src: url('/fonts/PPRightGrotesk-Medium.woff2') format('woff2'),
+       url('/fonts/PPRightGrotesk-Medium.woff') format('woff');
+  font-weight: 500; /* Medium weight */
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'PP Right Grotesk';
+  src: url('/fonts/PPRightGrotesk-Bold.woff2') format('woff2'),
+       url('/fonts/PPRightGrotesk-Bold.woff') format('woff');
+  font-weight: 700; /* Bold weight */
+  font-display: swap;
+}
+@font-face {
+  font-family: 'PP Right Grotesk';
+  src: url('/fonts/PPRightGrotesk-Bold.woff2') format('woff2'),
+       url('/fonts/PPRightGrotesk-Bold.woff') format('woff');
+  font-weight: 800; /* Bold weight */
+  font-display: swap;
+}
+
+/* Add additional weights as necessary */
+
 
 :root {
   --background: #ffffff;
@@ -167,9 +201,10 @@ a {
 
 /* /text-clr-black/ */
 
-.textClrBlack{
+.textClrBlack {
   color: black;
 }
+
 @media(max-width:1440px) {
   .container {
     max-width: 1440px;
